@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct HomeView: View {
-  @State private var showAddDestinationSheet = false
+  @State private var showAddPetSheet = false
   @Environment(\.managedObjectContext) var managedObjectContext
   @FetchRequest(sortDescriptors: [SortDescriptor(\.createdAt, order: .reverse)])
-  var destinations: FetchedResults<Destination>
+  var pets: FetchedResults<Pet>
   private let stack = CoreDataStack.shared
 
   var body: some View {
@@ -12,24 +12,24 @@ struct HomeView: View {
       // swiftlint:disable trailing_closure
       VStack {
         List {
-          ForEach(destinations, id: \.objectID) { destination in
-            NavigationLink(destination: DestinationDetailView(destination: destination)) {
+          ForEach(pets, id: \.objectID) { pet in
+            NavigationLink(destination: PetDetailView(pet: pet)) {
               HStack {
                 VStack(alignment: .leading) {
-                  Image(uiImage: UIImage(data: destination.image ?? Data()) ?? UIImage())
+                  Image(uiImage: UIImage(data: pet.image ?? Data()) ?? UIImage())
                     .resizable()
                     .scaledToFill()
 
-                  Text(destination.caption)
+                  Text(pet.caption)
                     .font(.title3)
                     .foregroundColor(.primary)
 
-                  Text(destination.details)
+                  Text(pet.details)
                     .font(.callout)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.leading)
                                 
-                  if stack.isShared(object: destination) {
+                  if stack.isShared(object: pet) {
                     Image(systemName: "person.3.fill")
                       .resizable()
                       .scaledToFit()
@@ -40,28 +40,28 @@ struct HomeView: View {
             }
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 Button(role: .destructive) {
-                  stack.delete(destination)
+                  stack.delete(pet)
                 } label: {
                   Label("Delete", systemImage: "trash")
-                }.disabled(!stack.canDelete(object: destination))
+                }.disabled(!stack.canDelete(object: pet))
             }
           }
         }
         Spacer()
         Button {
-          showAddDestinationSheet.toggle()
+          showAddPetSheet.toggle()
         } label: {
           Text("Add Pet")
         }
         .buttonStyle(.borderedProminent)
         .padding(.bottom, 8)
       }
-      .emptyState(destinations.isEmpty, emptyContent: {
+      .emptyState(pets.isEmpty, emptyContent: {
         VStack {
           Text("No pets yet")
             .font(.headline)
           Button {
-            showAddDestinationSheet.toggle()
+            showAddPetSheet.toggle()
           } label: {
             Text("Add Pet")
           }
@@ -72,8 +72,8 @@ struct HomeView: View {
         .background(Color(uiColor: UIColor.systemGray4))
         .cornerRadius(10)
       })
-      .sheet(isPresented: $showAddDestinationSheet, content: {
-        AddDestinationView()
+      .sheet(isPresented: $showAddPetSheet, content: {
+        AddPetView()
       })
       .navigationTitle("Pets")
       .navigationViewStyle(.stack)

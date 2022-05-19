@@ -1,12 +1,12 @@
 import SwiftUI
 
-struct EditDestinationView: View {
-  let destination: Destination
+struct EditPetView: View {
+  let pet: Pet
   private var stack = CoreDataStack.shared
   private var hasInvalidData: Bool {
-    return destination.caption.isBlank ||
-    destination.details.isBlank ||
-    (destination.caption == captionText && destination.details == detailsText)
+    return pet.caption.isBlank ||
+    pet.details.isBlank ||
+    (pet.caption == captionText && pet.details == detailsText)
   }
 
   @State private var captionText: String = ""
@@ -14,8 +14,8 @@ struct EditDestinationView: View {
   @Environment(\.presentationMode) var presentationMode
   @Environment(\.managedObjectContext) var managedObjectContext
 
-  init(destination: Destination) {
-    self.destination = destination
+  init(pet: Pet) {
+    self.pet = pet
   }
 
   var body: some View {
@@ -38,13 +38,13 @@ struct EditDestinationView: View {
         }
       }
       .padding()
-      .navigationTitle("Edit Destination")
+      .navigationTitle("Edit Pet")
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
             managedObjectContext.performAndWait {
-              destination.caption = captionText
-              destination.details = detailsText
+              pet.caption = captionText
+              pet.details = detailsText
               stack.save()
               presentationMode.wrappedValue.dismiss()
             }
@@ -63,8 +63,8 @@ struct EditDestinationView: View {
       }
     }
     .onAppear {
-      captionText = destination.caption
-      detailsText = destination.details
+      captionText = pet.caption
+      detailsText = pet.details
     }
   }
 }

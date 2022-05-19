@@ -1,10 +1,10 @@
 import CoreData
 
 // MARK: Fetch request and managed object properties
-extension Destination {
+extension Pet {
   @nonobjc
-  public class func fetchRequest() -> NSFetchRequest<Destination> {
-    return NSFetchRequest<Destination>(entityName: "Destination")
+  public class func fetchRequest() -> NSFetchRequest<Pet> {
+    return NSFetchRequest<Pet>(entityName: "Pet")
   }
 
   @NSManaged public var name: String
@@ -16,5 +16,5 @@ extension Destination {
 }
 
 // MARK: Identifiable
-extension Destination: Identifiable {
+extension Pet: Identifiable {
 }

@@ -1,8 +1,8 @@
 import CloudKit
 import SwiftUI
 
-struct DestinationDetailView: View {
-  @ObservedObject var destination: Destination
+struct PetDetailView: View {
+  @ObservedObject var pet: Pet
   @State private var share: CKShare?
   @State private var showShareSheet = false
   @State private var showEditSheet = false
@@ -13,16 +13,16 @@ struct DestinationDetailView: View {
     List {
       Section {
         VStack(alignment: .leading, spacing: 4) {
-          if let imageData = destination.image, let image = UIImage(data: imageData) {
+          if let imageData = pet.image, let image = UIImage(data: imageData) {
             Image(uiImage: image)
               .resizable()
               .scaledToFit()
           }
-          Text(destination.caption)
+          Text(pet.caption)
             .font(.headline)
-          Text(destination.details)
+          Text(pet.details)
             .font(.subheadline)
-          Text(destination.createdAt.formatted(date: .abbreviated, time: .shortened))
+          Text(pet.createdAt.formatted(date: .abbreviated, time: .shortened))
             .font(.footnote)
             .foregroundColor(.secondary)
             .padding(.bottom, 8)
@@ -54,19 +54,19 @@ struct DestinationDetailView: View {
         CloudSharingView(
           share: share,
           container: stack.ckContainer,
-          destination: destination
+          pet: pet
         )
       }
     })
     .sheet(isPresented: $showEditSheet, content: {
-      EditDestinationView(destination: destination)
+      EditPetView(pet: pet)
     })
     .toolbar {
       
         
       
       ToolbarItem(placement: .navigationBarTrailing) {
-        if (stack.canUpdate(object: destination)) {
+        if (stack.canUpdate(object: pet)) {
           Button {
             showEditSheet.toggle()
           } label: {
@@ -76,15 +76,15 @@ struct DestinationDetailView: View {
       }
       ToolbarItem(placement: .navigationBarTrailing) {
         Button {
-          if !stack.isShared(object: destination) {
+          if !stack.isShared(object: pet) {
             Task {
-              await createShare(destination)
+              await createShare(pet)
             }
           }
           showShareSheet = true
         } label: {
           Image(systemName:
-            stack.isShared(object: destination)
+            stack.isShared(object: pet)
               ? "person.crop.circle.fill.badge.checkmark"
               : "person.crop.circle.badge.plus"
           )
@@ -92,13 +92,13 @@ struct DestinationDetailView: View {
       }
     }
     .onAppear(perform: {
-      self.share = stack.getShare(destination)
+      self.share = stack.getShare(pet)
     })
   }
 }
 
 // MARK: Returns CKShare participant permission
-extension DestinationDetailView {
+extension PetDetailView {
   private func string(for permission: CKShare.ParticipantPermission) -> String {
     switch permission {
     case .unknown:
@@ -144,10 +144,10 @@ extension DestinationDetailView {
     }
   }
   
-  private func createShare(_ destination: Destination) async {
+  private func createShare(_ pet: Pet) async {
     do {
-      let (_, share, _) = try await stack.persistentContainer.share([destination], to: nil)
-      share[CKShare.SystemFieldKey.title] = destination.caption
+      let (_, share, _) = try await stack.persistentContainer.share([pet], to: nil)
+      share[CKShare.SystemFieldKey.title] = pet.caption
       self.share = share
     } catch {
       print("Failed to create share")

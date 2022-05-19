@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AddDestinationView: View {
+struct AddPetView: View {
   @Environment(\.presentationMode) var presentationMode
   @Environment(\.managedObjectContext) var managedObjectContext
 
@@ -47,7 +47,7 @@ struct AddDestinationView: View {
         }
         Section {
           Button {
-            createNewDestination()
+            createNewPet()
             presentationMode.wrappedValue.dismiss()
           } label: {
             Text("Save")
@@ -63,27 +63,27 @@ struct AddDestinationView: View {
   }
 }
 
-// MARK: Loading image and creating a new destination
-extension AddDestinationView {
+// MARK: Loading image and creating a new pet
+extension AddPetView {
   private func loadImage() {
     guard let inputImage = inputImage else { return }
     image = Image(uiImage: inputImage)
   }
 
-  private func createNewDestination() {
-    let destination = Destination(context: managedObjectContext)
-    destination.id = UUID()
-    destination.createdAt = Date.now
-    destination.caption = caption
-    destination.details = details
+  private func createNewPet() {
+    let pet = Pet(context: managedObjectContext)
+    pet.id = UUID()
+    pet.createdAt = Date.now
+    pet.caption = caption
+    pet.details = details
     let imageData = inputImage?.jpegData(compressionQuality: 0.8)
-    destination.image = imageData
+    pet.image = imageData
     stack.save()
   }
 }
 
-struct AddDestinationView_Previews: PreviewProvider {
+struct AddPetView_Previews: PreviewProvider {
   static var previews: some View {
-    AddDestinationView()
+    AddPetView()
   }
 }

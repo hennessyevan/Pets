@@ -125,14 +125,14 @@ extension CoreDataStack {
     return false
   }
   
-  func getShare(_ destination: Destination) -> CKShare? {
-    guard isShared(object: destination) else { return nil }
-    guard let shareDictionary = try? persistentContainer.fetchShares(matching: [destination.objectID]), let share = shareDictionary[destination.objectID] else {
+  func getShare(_ pet: Pet) -> CKShare? {
+    guard isShared(object: pet) else { return nil }
+    guard let shareDictionary = try? persistentContainer.fetchShares(matching: [pet.objectID]), let share = shareDictionary[pet.objectID] else {
       print("Unable to get CKShare")
       return nil
     }
     
-    share[CKShare.SystemFieldKey.title] = destination.caption
+    share[CKShare.SystemFieldKey.title] = pet.caption
     return share
   }
   
@@ -165,9 +165,9 @@ extension CoreDataStack {
     }
   }
 
-  func delete(_ destination: Destination) {
+  func delete(_ pet: Pet) {
     context.perform {
-      self.context.delete(destination)
+      self.context.delete(pet)
       self.save()
     }
   }

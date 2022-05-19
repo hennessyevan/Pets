@@ -4,15 +4,15 @@ import SwiftUI
 struct CloudSharingView: UIViewControllerRepresentable {
   let share: CKShare
   let container: CKContainer
-  let destination: Destination
+  let pet: Pet
 
   func makeCoordinator() -> CloudSharingCoordinator {
-    CloudSharingCoordinator(destination: destination)
+    CloudSharingCoordinator(pet: pet)
   }
 
   func makeUIViewController(context: Context) -> UICloudSharingController {
 
-    share[CKShare.SystemFieldKey.title] = destination.caption
+    share[CKShare.SystemFieldKey.title] = pet.caption
 
     let controller = UICloudSharingController(share: share, container: container)
     controller.modalPresentationStyle = .formSheet
@@ -26,13 +26,13 @@ struct CloudSharingView: UIViewControllerRepresentable {
 
 final class CloudSharingCoordinator: NSObject, UICloudSharingControllerDelegate {
   let stack = CoreDataStack.shared
-  let destination: Destination
-  init(destination: Destination) {
-    self.destination = destination
+  let pet: Pet
+  init(pet: Pet) {
+    self.pet = pet
   }
 
   func itemTitle(for csc: UICloudSharingController) -> String? {
-    destination.caption
+    pet.caption
   }
 
   func cloudSharingController(_ csc: UICloudSharingController, failedToSaveShareWithError error: Error) {
@@ -44,8 +44,8 @@ final class CloudSharingCoordinator: NSObject, UICloudSharingControllerDelegate 
   }
 
   func cloudSharingControllerDidStopSharing(_ csc: UICloudSharingController) {
-    if !stack.isOwner(object: destination) {
-      stack.delete(destination)
+    if !stack.isOwner(object: pet) {
+      stack.delete(pet)
     }
   }
 }

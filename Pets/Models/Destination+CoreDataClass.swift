@@ -1,5 +1,5 @@
 import CoreData
 
-@objc(Destination)
-public class Destination: NSManagedObject {
+@objc(Pet)
+public class Pet: NSManagedObject {
 }

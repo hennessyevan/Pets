@@ -12,17 +12,17 @@
 		18D775C722AD944400AE281E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
 		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
-		2139E76D274FCCCC00FD2327 /* Pets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2139E76B274FCCCC00FD2327 /* Pets.xcdatamodeld */; };
-		2139E772274FD48500FD2327 /* AddDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2139E771274FD48500FD2327 /* AddDestinationView.swift */; };
+		2139E772274FD48500FD2327 /* AddPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2139E771274FD48500FD2327 /* AddPetView.swift */; };
 		2139E775274FDA9F00FD2327 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2139E774274FDA9F00FD2327 /* ImagePicker.swift */; };
 		215443322755DBF1003A52A7 /* Destination+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215443302755DBF1003A52A7 /* Destination+CoreDataClass.swift */; };
 		215443332755DBF1003A52A7 /* Destination+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215443312755DBF1003A52A7 /* Destination+CoreDataProperties.swift */; };
 		21A2495C274FF77900A88DE4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A2495B274FF77900A88DE4 /* CloudKit.framework */; };
 		21A2495E274FFE1300A88DE4 /* CloudSharingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A2495D274FFE1300A88DE4 /* CloudSharingController.swift */; };
 		21A249602752F85800A88DE4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A2495F2752F85800A88DE4 /* CoreDataStack.swift */; };
-		21A249622753022A00A88DE4 /* DestinationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A249612753022A00A88DE4 /* DestinationDetailView.swift */; };
+		21A249622753022A00A88DE4 /* PetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A249612753022A00A88DE4 /* PetDetailView.swift */; };
 		21A24964275304EA00A88DE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A24963275304EA00A88DE4 /* AppDelegate.swift */; };
-		21CA6C5227532FC700E1C8E1 /* EditDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CA6C5127532FC700E1C8E1 /* EditDestinationView.swift */; };
+		21CA6C5227532FC700E1C8E1 /* EditPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CA6C5127532FC700E1C8E1 /* EditPetView.swift */; };
+		350A2D6D2836B7360052C21D /* Pets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 350A2D6A2836B7360052C21D /* Pets.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,8 +33,7 @@
 		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		2139E76C274FCCCC00FD2327 /*  */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; name = ""; sourceTree = "<group>"; };
-		2139E771274FD48500FD2327 /* AddDestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDestinationView.swift; sourceTree = "<group>"; };
+		2139E771274FD48500FD2327 /* AddPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetView.swift; sourceTree = "<group>"; };
 		2139E774274FDA9F00FD2327 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		215443302755DBF1003A52A7 /* Destination+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Destination+CoreDataClass.swift"; sourceTree = "<group>"; };
 		215443312755DBF1003A52A7 /* Destination+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Destination+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -42,9 +41,11 @@
 		21A2495B274FF77900A88DE4 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		21A2495D274FFE1300A88DE4 /* CloudSharingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSharingController.swift; sourceTree = "<group>"; };
 		21A2495F2752F85800A88DE4 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		21A249612753022A00A88DE4 /* DestinationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailView.swift; sourceTree = "<group>"; };
+		21A249612753022A00A88DE4 /* PetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailView.swift; sourceTree = "<group>"; };
 		21A24963275304EA00A88DE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		21CA6C5127532FC700E1C8E1 /* EditDestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDestinationView.swift; sourceTree = "<group>"; };
+		21CA6C5127532FC700E1C8E1 /* EditPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPetView.swift; sourceTree = "<group>"; };
+		350A2D6B2836B7360052C21D /* MyTravelJournal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyTravelJournal.xcdatamodel; sourceTree = "<group>"; };
+		350A2D6C2836B7360052C21D /* Pets.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pets.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +108,7 @@
 		2139E76A274FCC8000FD2327 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2139E76B274FCCCC00FD2327 /* Pets.xcdatamodeld */,
+				350A2D6A2836B7360052C21D /* Pets.xcdatamodeld */,
 				215443302755DBF1003A52A7 /* Destination+CoreDataClass.swift */,
 				215443312755DBF1003A52A7 /* Destination+CoreDataProperties.swift */,
 			);
@@ -117,11 +118,11 @@
 		2139E76E274FD13900FD2327 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2139E771274FD48500FD2327 /* AddDestinationView.swift */,
+				2139E771274FD48500FD2327 /* AddPetView.swift */,
 				18D775C422AD944300AE281E /* HomeView.swift */,
 				2139E774274FDA9F00FD2327 /* ImagePicker.swift */,
-				21A249612753022A00A88DE4 /* DestinationDetailView.swift */,
-				21CA6C5127532FC700E1C8E1 /* EditDestinationView.swift */,
+				21A249612753022A00A88DE4 /* PetDetailView.swift */,
+				21CA6C5127532FC700E1C8E1 /* EditPetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,14 +244,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				350A2D6D2836B7360052C21D /* Pets.xcdatamodeld in Sources */,
 				18D775C522AD944300AE281E /* HomeView.swift in Sources */,
-				2139E772274FD48500FD2327 /* AddDestinationView.swift in Sources */,
+				2139E772274FD48500FD2327 /* AddPetView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
 				2139E775274FDA9F00FD2327 /* ImagePicker.swift in Sources */,
 				215443322755DBF1003A52A7 /* Destination+CoreDataClass.swift in Sources */,
-				2139E76D274FCCCC00FD2327 /* Pets.xcdatamodeld in Sources */,
-				21CA6C5227532FC700E1C8E1 /* EditDestinationView.swift in Sources */,
-				21A249622753022A00A88DE4 /* DestinationDetailView.swift in Sources */,
+				21CA6C5227532FC700E1C8E1 /* EditPetView.swift in Sources */,
+				21A249622753022A00A88DE4 /* PetDetailView.swift in Sources */,
 				215443332755DBF1003A52A7 /* Destination+CoreDataProperties.swift in Sources */,
 				21A2495E274FFE1300A88DE4 /* CloudSharingController.swift in Sources */,
 				21A24964275304EA00A88DE4 /* AppDelegate.swift in Sources */,
@@ -462,12 +463,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		2139E76B274FCCCC00FD2327 /* Pets.xcdatamodeld */ = {
+		350A2D6A2836B7360052C21D /* Pets.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				2139E76C274FCCCC00FD2327 /*  */,
+				350A2D6B2836B7360052C21D /* MyTravelJournal.xcdatamodel */,
+				350A2D6C2836B7360052C21D /* Pets.xcdatamodel */,
 			);
-			currentVersion = 2139E76C274FCCCC00FD2327 /*  */;
+			currentVersion = 350A2D6B2836B7360052C21D /* MyTravelJournal.xcdatamodel */;
 			path = Pets.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
