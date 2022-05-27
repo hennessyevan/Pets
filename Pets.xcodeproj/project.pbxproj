@@ -22,7 +22,13 @@
 		21A249622753022A00A88DE4 /* PetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A249612753022A00A88DE4 /* PetDetailView.swift */; };
 		21A24964275304EA00A88DE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A24963275304EA00A88DE4 /* AppDelegate.swift */; };
 		21CA6C5227532FC700E1C8E1 /* EditPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CA6C5127532FC700E1C8E1 /* EditPetView.swift */; };
-		350A2D6D2836B7360052C21D /* Pets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 350A2D6A2836B7360052C21D /* Pets.xcdatamodeld */; };
+		350A2D6F2836F20B0052C21D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350A2D6E2836F20B0052C21D /* Router.swift */; };
+		350A2D722836F3300052C21D /* Helm in Frameworks */ = {isa = PBXBuildFile; productRef = 350A2D712836F3300052C21D /* Helm */; };
+		3528787628401321000B6059 /* Helm in Frameworks */ = {isa = PBXBuildFile; productRef = 3528787528401321000B6059 /* Helm */; };
+		354B026B2840647000AB2650 /* Pets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 354B02692840647000AB2650 /* Pets.xcdatamodeld */; };
+		35A5DFAA28411327007BF835 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A5DFA928411327007BF835 /* Color+Extensions.swift */; };
+		35D8C443284050CD00D95A31 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D8C442284050CD00D95A31 /* String+Extensions.swift */; };
+		35D8C44A28405F0600D95A31 /* DogBreeds.json in Resources */ = {isa = PBXBuildFile; fileRef = 35D8C44928405F0600D95A31 /* DogBreeds.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,8 +50,11 @@
 		21A249612753022A00A88DE4 /* PetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailView.swift; sourceTree = "<group>"; };
 		21A24963275304EA00A88DE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21CA6C5127532FC700E1C8E1 /* EditPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPetView.swift; sourceTree = "<group>"; };
-		350A2D6B2836B7360052C21D /* MyTravelJournal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyTravelJournal.xcdatamodel; sourceTree = "<group>"; };
-		350A2D6C2836B7360052C21D /* Pets.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pets.xcdatamodel; sourceTree = "<group>"; };
+		350A2D6E2836F20B0052C21D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		354B026A2840647000AB2650 /* Pets.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pets.xcdatamodel; sourceTree = "<group>"; };
+		35A5DFA928411327007BF835 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		35D8C442284050CD00D95A31 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		35D8C44928405F0600D95A31 /* DogBreeds.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DogBreeds.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3528787628401321000B6059 /* Helm in Frameworks */,
+				350A2D722836F3300052C21D /* Helm in Frameworks */,
 				21A2495C274FF77900A88DE4 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,6 +93,9 @@
 		18D775BF22AD944300AE281E /* Pets */ = {
 			isa = PBXGroup;
 			children = (
+				35A5DFA62841121F007BF835 /* Styles */,
+				35D8C44828405E8000D95A31 /* Data */,
+				35D8C441284050BE00D95A31 /* Extensions */,
 				DA95FBC327A90E8C0038B5EC /* Helper */,
 				2139E773274FD55D00FD2327 /* Controller */,
 				2139E76E274FD13900FD2327 /* Views */,
@@ -108,9 +122,10 @@
 		2139E76A274FCC8000FD2327 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				350A2D6A2836B7360052C21D /* Pets.xcdatamodeld */,
+				354B02692840647000AB2650 /* Pets.xcdatamodeld */,
 				215443302755DBF1003A52A7 /* Destination+CoreDataClass.swift */,
 				215443312755DBF1003A52A7 /* Destination+CoreDataProperties.swift */,
+				35D8C44928405F0600D95A31 /* DogBreeds.json */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -131,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				21A2495D274FFE1300A88DE4 /* CloudSharingController.swift */,
+				350A2D6E2836F20B0052C21D /* Router.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -141,6 +157,29 @@
 				21A2495B274FF77900A88DE4 /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		35A5DFA62841121F007BF835 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		35D8C441284050BE00D95A31 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				35D8C442284050CD00D95A31 /* String+Extensions.swift */,
+				35A5DFA928411327007BF835 /* Color+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		35D8C44828405E8000D95A31 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		DA95FBC327A90E8C0038B5EC /* Helper */ = {
@@ -168,6 +207,10 @@
 			dependencies = (
 			);
 			name = Pets;
+			packageProductDependencies = (
+				350A2D712836F3300052C21D /* Helm */,
+				3528787528401321000B6059 /* Helm */,
+			);
 			productName = MyRWTutorial;
 			productReference = 18D775BD22AD944300AE281E /* Pets.app */;
 			productType = "com.apple.product-type.application";
@@ -196,6 +239,9 @@
 				Base,
 			);
 			mainGroup = 18D775B422AD944300AE281E;
+			packageReferences = (
+				350A2D702836F3300052C21D /* XCRemoteSwiftPackageReference "Helm" */,
+			);
 			productRefGroup = 18D775BE22AD944300AE281E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -211,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */,
+				35D8C44A28405F0600D95A31 /* DogBreeds.json in Resources */,
 				18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */,
 				18D775C722AD944400AE281E /* Assets.xcassets in Resources */,
 			);
@@ -244,11 +291,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				350A2D6D2836B7360052C21D /* Pets.xcdatamodeld in Sources */,
 				18D775C522AD944300AE281E /* HomeView.swift in Sources */,
 				2139E772274FD48500FD2327 /* AddPetView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
+				35D8C443284050CD00D95A31 /* String+Extensions.swift in Sources */,
 				2139E775274FDA9F00FD2327 /* ImagePicker.swift in Sources */,
+				35A5DFAA28411327007BF835 /* Color+Extensions.swift in Sources */,
 				215443322755DBF1003A52A7 /* Destination+CoreDataClass.swift in Sources */,
 				21CA6C5227532FC700E1C8E1 /* EditPetView.swift in Sources */,
 				21A249622753022A00A88DE4 /* PetDetailView.swift in Sources */,
@@ -256,6 +304,8 @@
 				21A2495E274FFE1300A88DE4 /* CloudSharingController.swift in Sources */,
 				21A24964275304EA00A88DE4 /* AppDelegate.swift in Sources */,
 				21A249602752F85800A88DE4 /* CoreDataStack.swift in Sources */,
+				350A2D6F2836F20B0052C21D /* Router.swift in Sources */,
+				354B026B2840647000AB2650 /* Pets.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,14 +512,37 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		350A2D702836F3300052C21D /* XCRemoteSwiftPackageReference "Helm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/valentinradu/Helm";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		350A2D712836F3300052C21D /* Helm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 350A2D702836F3300052C21D /* XCRemoteSwiftPackageReference "Helm" */;
+			productName = Helm;
+		};
+		3528787528401321000B6059 /* Helm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 350A2D702836F3300052C21D /* XCRemoteSwiftPackageReference "Helm" */;
+			productName = Helm;
+		};
+/* End XCSwiftPackageProductDependency section */
+
 /* Begin XCVersionGroup section */
-		350A2D6A2836B7360052C21D /* Pets.xcdatamodeld */ = {
+		354B02692840647000AB2650 /* Pets.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				350A2D6B2836B7360052C21D /* MyTravelJournal.xcdatamodel */,
-				350A2D6C2836B7360052C21D /* Pets.xcdatamodel */,
+				354B026A2840647000AB2650 /* Pets.xcdatamodel */,
 			);
-			currentVersion = 350A2D6B2836B7360052C21D /* MyTravelJournal.xcdatamodel */;
+			currentVersion = 354B026A2840647000AB2650 /* Pets.xcdatamodel */;
 			path = Pets.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

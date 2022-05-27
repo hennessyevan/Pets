@@ -21,11 +21,12 @@ struct AddPetView: View {
             .font(.caption)
             .foregroundColor(caption.isBlank ? .red : .clear)
         }
+      
 
         Section {
           TextEditor(text: $details)
         } header: {
-          Text("Birthday")
+          Text("Breed")
         } footer: {
           Text("Birthday is required")
             .font(.caption)
