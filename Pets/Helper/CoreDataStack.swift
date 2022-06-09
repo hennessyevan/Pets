@@ -132,7 +132,7 @@ extension CoreDataStack {
       return nil
     }
     
-    share[CKShare.SystemFieldKey.title] = pet.caption
+    share[CKShare.SystemFieldKey.title] = pet.name
     return share
   }
   

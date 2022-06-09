@@ -4,9 +4,9 @@ struct EditPetView: View {
   let pet: Pet
   private var stack = CoreDataStack.shared
   private var hasInvalidData: Bool {
-    return pet.caption.isBlank ||
+    return pet.name.isBlank ||
     pet.details.isBlank ||
-    (pet.caption == captionText && pet.details == detailsText)
+    (pet.name == captionText && pet.details == detailsText)
   }
 
   @State private var captionText: String = ""
@@ -43,7 +43,7 @@ struct EditPetView: View {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
             managedObjectContext.performAndWait {
-              pet.caption = captionText
+              pet.name = captionText
               pet.details = detailsText
               stack.save()
               presentationMode.wrappedValue.dismiss()
@@ -63,7 +63,7 @@ struct EditPetView: View {
       }
     }
     .onAppear {
-      captionText = pet.caption
+      captionText = pet.name
       detailsText = pet.details
     }
   }

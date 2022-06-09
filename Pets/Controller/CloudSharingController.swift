@@ -12,7 +12,7 @@ struct CloudSharingView: UIViewControllerRepresentable {
 
   func makeUIViewController(context: Context) -> UICloudSharingController {
 
-    share[CKShare.SystemFieldKey.title] = pet.caption
+    share[CKShare.SystemFieldKey.title] = pet.name
 
     let controller = UICloudSharingController(share: share, container: container)
     controller.modalPresentationStyle = .formSheet
@@ -32,7 +32,7 @@ final class CloudSharingCoordinator: NSObject, UICloudSharingControllerDelegate 
   }
 
   func itemTitle(for csc: UICloudSharingController) -> String? {
-    pet.caption
+    pet.name
   }
 
   func cloudSharingController(_ csc: UICloudSharingController, failedToSaveShareWithError error: Error) {

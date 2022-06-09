@@ -9,7 +9,6 @@ struct PetDetailView: View {
   private let stack = CoreDataStack.shared
 
   var body: some View {
-    // swiftlint:disable trailing_closure
     List {
       Section {
         VStack(alignment: .leading, spacing: 4) {
@@ -18,7 +17,7 @@ struct PetDetailView: View {
               .resizable()
               .scaledToFit()
           }
-          Text(pet.caption)
+          Text(pet.name)
             .font(.headline)
           Text(pet.details)
             .font(.subheadline)
@@ -29,8 +28,8 @@ struct PetDetailView: View {
         }
       }
 
-      Section {
-        if let share = share {
+      if let share = share {
+        Section {
           ForEach(share.participants, id: \.self) { participant in
             VStack(alignment: .leading) {
               Text(participant.userIdentity.nameComponents?.formatted(.name(style: .long)) ?? "")
@@ -44,9 +43,9 @@ struct PetDetailView: View {
             }
             .padding(.bottom, 8)
           }
+        } header: {
+          Text("Shared With")
         }
-      } header: {
-        Text("Participants")
       }
     }
     .sheet(isPresented: $showShareSheet, content: {
@@ -62,9 +61,6 @@ struct PetDetailView: View {
       EditPetView(pet: pet)
     })
     .toolbar {
-      
-        
-      
       ToolbarItem(placement: .navigationBarTrailing) {
         if (stack.canUpdate(object: pet)) {
           Button {
@@ -147,10 +143,27 @@ extension PetDetailView {
   private func createShare(_ pet: Pet) async {
     do {
       let (_, share, _) = try await stack.persistentContainer.share([pet], to: nil)
-      share[CKShare.SystemFieldKey.title] = pet.caption
+      share[CKShare.SystemFieldKey.title] = pet.name
       self.share = share
     } catch {
       print("Failed to create share")
     }
+  }
+}
+
+struct PetDetailView_Preview: PreviewProvider {
+  static var pet = {
+    let _pet = Pet(context: CoreDataStack.shared.context)
+    _pet.id = UUID()
+    _pet.createdAt = Date.now
+    _pet.name = "Fido"
+    _pet.details = "Hello"
+    return _pet
+  }()
+  
+  static var previews: some View {
+  
+    
+    return PetDetailView(pet: pet)
   }
 }

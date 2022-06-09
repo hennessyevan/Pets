@@ -4,7 +4,7 @@ struct AddPetView: View {
   @Environment(\.presentationMode) var presentationMode
   @Environment(\.managedObjectContext) var managedObjectContext
 
-  @State private var caption: String = ""
+  @State private var name: String = ""
   @State private var details: String = ""
   @State private var inputImage: UIImage?
   @State private var image: Image?
@@ -15,11 +15,11 @@ struct AddPetView: View {
     NavigationView {
       Form {
         Section {
-          TextField("Name", text: $caption)
+          TextField("Name", text: $name)
         } footer: {
           Text("Name is required")
             .font(.caption)
-            .foregroundColor(caption.isBlank ? .red : .clear)
+            .foregroundColor(name.isBlank ? .red : .clear)
         }
       
 
@@ -53,7 +53,7 @@ struct AddPetView: View {
           } label: {
             Text("Save")
           }
-          .disabled(caption.isBlank || details.isBlank)
+          .disabled(name.isBlank || details.isBlank)
         }
       }
       .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
@@ -75,7 +75,7 @@ extension AddPetView {
     let pet = Pet(context: managedObjectContext)
     pet.id = UUID()
     pet.createdAt = Date.now
-    pet.caption = caption
+    pet.name = name
     pet.details = details
     let imageData = inputImage?.jpegData(compressionQuality: 0.8)
     pet.image = imageData
@@ -85,6 +85,10 @@ extension AddPetView {
 
 struct AddPetView_Previews: PreviewProvider {
   static var previews: some View {
-    AddPetView()
+    HStack {
+      EmptyView()
+    }.sheet(isPresented: .constant(true)) {
+      AddPetView()
+    }
   }
 }

@@ -1,5 +1,4 @@
 import SwiftUI
-import Helm
 
 @main
 struct AppMain: App {
@@ -7,18 +6,8 @@ struct AppMain: App {
   
   var body: some Scene {
     WindowGroup {
-      RootView()
+      HomeView()
         .environment(\.managedObjectContext, CoreDataStack.shared.context)
     }
-  }
-}
-
-
-struct RootView: View {
-  @StateObject private var _helm: Helm = try! Helm(nav: segues)
-  
-  var body: some View {
-    HomeView()
-      .environmentObject(_helm)
   }
 }

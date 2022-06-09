@@ -1,12 +1,8 @@
 import SwiftUI
-import Helm
 
 struct HomeView: View {
-  @State private var showAddPetSheet = false
-  @State private var screen: String? = nil
-  
   @Environment(\.managedObjectContext) var managedObjectContext
-  @EnvironmentObject private var _helm: Helm<RoutesFragment>
+  @State private var addingPet = false
   
   @FetchRequest(sortDescriptors: [SortDescriptor(\.createdAt, order: .reverse)])
   
@@ -15,20 +11,20 @@ struct HomeView: View {
   private let stack = CoreDataStack.shared
   
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack {
         List {
           ForEach(pets, id: \.objectID) { pet in
-            NavigationLink(destination: PetDetailView(pet: pet), isActive: _helm.isPresented(.pet, id: pet.id.uuidString)) {
+            NavigationLink(destination: PetDetailView(pet: pet)) {
               
-              Button(action: { screen = pet.id.uuidString }) {
+              Button(action: {  }) {
                 HStack {
                   VStack(alignment: .leading) {
                     Image(uiImage: UIImage(data: pet.image ?? Data()) ?? UIImage())
                       .resizable()
                       .scaledToFill()
                     
-                    Text(pet.caption)
+                    Text(pet.name)
                       .font(.title3)
                       .foregroundColor(.primary)
                     
@@ -60,7 +56,7 @@ struct HomeView: View {
         
         Spacer()
         Button {
-          showAddPetSheet.toggle()
+          
         } label: {
           Text("Add Pet")
         }
@@ -72,7 +68,7 @@ struct HomeView: View {
           Text("No pets yet")
             .font(.headline)
           Button {
-            showAddPetSheet.toggle()
+            
           } label: {
             Text("Add Pet")
           }
@@ -84,7 +80,7 @@ struct HomeView: View {
         .background(Color(uiColor: UIColor.systemGray6))
         .cornerRadius(10)
       })
-      .sheet(isPresented: $showAddPetSheet, content: {
+      .sheet(isPresented: $addingPet, content: {
         AddPetView()
       })
       .navigationTitle("Pets")
