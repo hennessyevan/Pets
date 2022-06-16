@@ -1,94 +1,113 @@
 import SwiftUI
+import PhotosUI
 
 struct AddPetView: View {
-  @Environment(\.presentationMode) var presentationMode
-  @Environment(\.managedObjectContext) var managedObjectContext
-
-  @State private var name: String = ""
-  @State private var details: String = ""
-  @State private var inputImage: UIImage?
-  @State private var image: Image?
-  @State private var showingImagePicker = false
-  private var stack = CoreDataStack.shared
-
-  var body: some View {
-    NavigationView {
-      Form {
-        Section {
-          TextField("Name", text: $name)
-        } footer: {
-          Text("Name is required")
-            .font(.caption)
-            .foregroundColor(name.isBlank ? .red : .clear)
-        }
-      
-
-        Section {
-          TextEditor(text: $details)
-        } header: {
-          Text("Breed")
-        } footer: {
-          Text("Birthday is required")
-            .font(.caption)
-            .foregroundColor(details.isBlank ? .red : .clear)
-        }
-
-        Section {
-          if image == nil {
-            Button {
-              self.showingImagePicker = true
-            } label: {
-              Text("Add a photo")
-            }
-          }
-
-          image?
-            .resizable()
-            .scaledToFit()
-        }
-        Section {
-          Button {
-            createNewPet()
-            presentationMode.wrappedValue.dismiss()
-          } label: {
-            Text("Save")
-          }
-          .disabled(name.isBlank || details.isBlank)
-        }
-      }
-      .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-        ImagePicker(image: $inputImage)
-      }
-      .navigationTitle("Add Pet")
-    }
-  }
+	@Environment(\.managedObjectContext) var managedObjectContext
+	@Environment(\.dismiss) private var dismiss
+	
+	@StateObject private var viewModel = ViewModel()
+	
+	private var stack = CoreDataStack.shared
+	
+	var body: some View {
+		NavigationStack {
+			Form {
+				Section {
+					TextField("Name", text: $viewModel.name)
+				} footer: {
+					Text("Name is required")
+						.font(.caption)
+						.foregroundColor(viewModel.name.isBlank ? .red : .clear)
+				}
+				
+				Section {
+					if viewModel.image == nil {
+						Button {
+							viewModel.showingImagePicker = true
+						} label: {
+							Text("Add a photo")
+						}
+					}
+					
+					viewModel.image?
+						.resizable()
+						.scaledToFit()
+				}
+				
+				DatePicker(
+					"Birthday",
+					selection: $viewModel.birthday.flatten(defaultValue: Date()),
+					displayedComponents: [.date]
+				)
+				
+				Section {
+					Button {
+						createNewPet()
+						dismiss()
+					} label: {
+						Text("Save")
+					}
+					.disabled(!viewModel.isValid)
+				}
+			}
+			.fullScreenCover(isPresented: $viewModel.showingImagePicker, onDismiss: loadImage) {
+				ImagePicker(image: $viewModel.inputImage, sourceType: .camera)
+			}
+			.toolbar {
+				ToolbarItem(placement: .cancellationAction) {
+					Button("Cancel", action: { dismiss() })
+				}
+			}
+			.navigationTitle("New Pet")
+			.navigationBarTitleDisplayMode(.inline)
+		}
+	}
 }
+
+// MARK: View Model
+fileprivate extension AddPetView {
+	@MainActor class ViewModel: ObservableObject {
+		/// Form Inputs
+		@Published var name = ""
+		@Published var image: Image?
+		@Published var birthday: Date?
+		
+		/// Image Picker
+		@Published var inputImage: UIImage?
+		@Published var showingImagePicker = false
+		
+		var isValid: Bool {
+			return !name.isBlank
+		}
+	}
+}
+
 
 // MARK: Loading image and creating a new pet
 extension AddPetView {
-  private func loadImage() {
-    guard let inputImage = inputImage else { return }
-    image = Image(uiImage: inputImage)
-  }
-
-  private func createNewPet() {
-    let pet = Pet(context: managedObjectContext)
-    pet.id = UUID()
-    pet.createdAt = Date.now
-    pet.name = name
-    pet.details = details
-    let imageData = inputImage?.jpegData(compressionQuality: 0.8)
-    pet.image = imageData
-    stack.save()
-  }
+	private func loadImage() {
+		guard let inputImage = viewModel.inputImage else { return }
+		viewModel.image = Image(uiImage: inputImage)
+	}
+	
+	private func createNewPet() {
+		let pet = Pet(context: managedObjectContext)
+		pet.id = UUID()
+		pet.createdAt = Date.now
+		pet.name = viewModel.name
+		let imageData = viewModel.inputImage?.jpegData(compressionQuality: 0.8)
+		pet.image = imageData
+		
+		stack.save()
+	}
 }
 
 struct AddPetView_Previews: PreviewProvider {
-  static var previews: some View {
-    HStack {
-      EmptyView()
-    }.sheet(isPresented: .constant(true)) {
-      AddPetView()
-    }
-  }
+	static var previews: some View {
+		HStack {
+			EmptyView()
+		}.sheet(isPresented: .constant(true)) {
+			AddPetView()
+		}
+	}
 }

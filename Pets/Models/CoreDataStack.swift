@@ -81,7 +81,6 @@ final class CoreDataStack: ObservableObject {
 
   private var _privatePersistentStore: NSPersistentStore?
   private var _sharedPersistentStore: NSPersistentStore?
-  private init() {}
 }
 
 // MARK: Check if an object is already shared
@@ -165,9 +164,9 @@ extension CoreDataStack {
     }
   }
 
-  func delete(_ pet: Pet) {
+  func delete(_ object: NSManagedObject) {
     context.perform {
-      self.context.delete(pet)
+      self.context.delete(object)
       self.save()
     }
   }

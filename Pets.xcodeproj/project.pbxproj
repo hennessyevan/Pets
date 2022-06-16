@@ -14,17 +14,19 @@
 		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
 		2139E772274FD48500FD2327 /* AddPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2139E771274FD48500FD2327 /* AddPetView.swift */; };
 		2139E775274FDA9F00FD2327 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2139E774274FDA9F00FD2327 /* ImagePicker.swift */; };
-		215443322755DBF1003A52A7 /* Destination+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215443302755DBF1003A52A7 /* Destination+CoreDataClass.swift */; };
-		215443332755DBF1003A52A7 /* Destination+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215443312755DBF1003A52A7 /* Destination+CoreDataProperties.swift */; };
+		215443322755DBF1003A52A7 /* Pet+ManagedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215443302755DBF1003A52A7 /* Pet+ManagedModel.swift */; };
 		21A2495C274FF77900A88DE4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A2495B274FF77900A88DE4 /* CloudKit.framework */; };
 		21A2495E274FFE1300A88DE4 /* CloudSharingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A2495D274FFE1300A88DE4 /* CloudSharingController.swift */; };
 		21A249602752F85800A88DE4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A2495F2752F85800A88DE4 /* CoreDataStack.swift */; };
 		21A249622753022A00A88DE4 /* PetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A249612753022A00A88DE4 /* PetDetailView.swift */; };
 		21A24964275304EA00A88DE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A24963275304EA00A88DE4 /* AppDelegate.swift */; };
 		21CA6C5227532FC700E1C8E1 /* EditPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CA6C5127532FC700E1C8E1 /* EditPetView.swift */; };
-		350A2D722836F3300052C21D /* Helm in Frameworks */ = {isa = PBXBuildFile; productRef = 350A2D712836F3300052C21D /* Helm */; };
 		354B026B2840647000AB2650 /* Pets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 354B02692840647000AB2650 /* Pets.xcdatamodeld */; };
+		35729848285A9840002E9010 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35729847285A9840002E9010 /* View+Extensions.swift */; };
+		3572984A285A9E38002E9010 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35729849285A9E38002E9010 /* Binding+Extensions.swift */; };
+		35A229B72857799D00FC4131 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A229B62857799D00FC4131 /* DataLoader.swift */; };
 		35A5DFAA28411327007BF835 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A5DFA928411327007BF835 /* Color+Extensions.swift */; };
+		35CF37252857D87900958B7B /* Breed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CF37242857D87900958B7B /* Breed.swift */; };
 		35D8C443284050CD00D95A31 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D8C442284050CD00D95A31 /* String+Extensions.swift */; };
 		35D8C44A28405F0600D95A31 /* DogBreeds.json in Resources */ = {isa = PBXBuildFile; fileRef = 35D8C44928405F0600D95A31 /* DogBreeds.json */; };
 /* End PBXBuildFile section */
@@ -39,8 +41,7 @@
 		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2139E771274FD48500FD2327 /* AddPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetView.swift; sourceTree = "<group>"; };
 		2139E774274FDA9F00FD2327 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		215443302755DBF1003A52A7 /* Destination+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Destination+CoreDataClass.swift"; sourceTree = "<group>"; };
-		215443312755DBF1003A52A7 /* Destination+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Destination+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		215443302755DBF1003A52A7 /* Pet+ManagedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pet+ManagedModel.swift"; sourceTree = "<group>"; };
 		21A24959274FF76400A88DE4 /* Pets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pets.entitlements; sourceTree = "<group>"; };
 		21A2495B274FF77900A88DE4 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		21A2495D274FFE1300A88DE4 /* CloudSharingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSharingController.swift; sourceTree = "<group>"; };
@@ -49,7 +50,11 @@
 		21A24963275304EA00A88DE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21CA6C5127532FC700E1C8E1 /* EditPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPetView.swift; sourceTree = "<group>"; };
 		354B026A2840647000AB2650 /* Pets.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pets.xcdatamodel; sourceTree = "<group>"; };
+		35729847285A9840002E9010 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		35729849285A9E38002E9010 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
+		35A229B62857799D00FC4131 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		35A5DFA928411327007BF835 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		35CF37242857D87900958B7B /* Breed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breed.swift; sourceTree = "<group>"; };
 		35D8C442284050CD00D95A31 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		35D8C44928405F0600D95A31 /* DogBreeds.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DogBreeds.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,7 +64,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				350A2D722836F3300052C21D /* Helm in Frameworks */,
 				21A2495C274FF77900A88DE4 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -89,10 +93,7 @@
 		18D775BF22AD944300AE281E /* Pets */ = {
 			isa = PBXGroup;
 			children = (
-				35A5DFA62841121F007BF835 /* Styles */,
-				35D8C44828405E8000D95A31 /* Data */,
 				35D8C441284050BE00D95A31 /* Extensions */,
-				DA95FBC327A90E8C0038B5EC /* Helper */,
 				2139E773274FD55D00FD2327 /* Controller */,
 				2139E76E274FD13900FD2327 /* Views */,
 				2139E76A274FCC8000FD2327 /* Models */,
@@ -119,9 +120,10 @@
 			isa = PBXGroup;
 			children = (
 				354B02692840647000AB2650 /* Pets.xcdatamodeld */,
-				215443302755DBF1003A52A7 /* Destination+CoreDataClass.swift */,
-				215443312755DBF1003A52A7 /* Destination+CoreDataProperties.swift */,
+				21A2495F2752F85800A88DE4 /* CoreDataStack.swift */,
+				215443302755DBF1003A52A7 /* Pet+ManagedModel.swift */,
 				35D8C44928405F0600D95A31 /* DogBreeds.json */,
+				35CF37242857D87900958B7B /* Breed.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -154,35 +156,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		35A5DFA62841121F007BF835 /* Styles */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Styles;
-			sourceTree = "<group>";
-		};
 		35D8C441284050BE00D95A31 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				35D8C442284050CD00D95A31 /* String+Extensions.swift */,
 				35A5DFA928411327007BF835 /* Color+Extensions.swift */,
+				35A229B62857799D00FC4131 /* DataLoader.swift */,
+				35729847285A9840002E9010 /* View+Extensions.swift */,
+				35729849285A9E38002E9010 /* Binding+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		35D8C44828405E8000D95A31 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		DA95FBC327A90E8C0038B5EC /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				21A2495F2752F85800A88DE4 /* CoreDataStack.swift */,
-			);
-			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,7 +186,6 @@
 			);
 			name = Pets;
 			packageProductDependencies = (
-				350A2D712836F3300052C21D /* Helm */,
 			);
 			productName = MyRWTutorial;
 			productReference = 18D775BD22AD944300AE281E /* Pets.app */;
@@ -235,6 +217,7 @@
 			mainGroup = 18D775B422AD944300AE281E;
 			packageReferences = (
 				350A2D702836F3300052C21D /* XCRemoteSwiftPackageReference "Helm" */,
+				35CF37262857EE5200958B7B /* XCRemoteSwiftPackageReference "SwiftValidators" */,
 			);
 			productRefGroup = 18D775BE22AD944300AE281E /* Products */;
 			projectDirPath = "";
@@ -288,13 +271,16 @@
 				18D775C522AD944300AE281E /* HomeView.swift in Sources */,
 				2139E772274FD48500FD2327 /* AddPetView.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
+				35CF37252857D87900958B7B /* Breed.swift in Sources */,
 				35D8C443284050CD00D95A31 /* String+Extensions.swift in Sources */,
 				2139E775274FDA9F00FD2327 /* ImagePicker.swift in Sources */,
+				35729848285A9840002E9010 /* View+Extensions.swift in Sources */,
 				35A5DFAA28411327007BF835 /* Color+Extensions.swift in Sources */,
-				215443322755DBF1003A52A7 /* Destination+CoreDataClass.swift in Sources */,
+				3572984A285A9E38002E9010 /* Binding+Extensions.swift in Sources */,
+				215443322755DBF1003A52A7 /* Pet+ManagedModel.swift in Sources */,
+				35A229B72857799D00FC4131 /* DataLoader.swift in Sources */,
 				21CA6C5227532FC700E1C8E1 /* EditPetView.swift in Sources */,
 				21A249622753022A00A88DE4 /* PetDetailView.swift in Sources */,
-				215443332755DBF1003A52A7 /* Destination+CoreDataProperties.swift in Sources */,
 				21A2495E274FFE1300A88DE4 /* CloudSharingController.swift in Sources */,
 				21A24964275304EA00A88DE4 /* AppDelegate.swift in Sources */,
 				21A249602752F85800A88DE4 /* CoreDataStack.swift in Sources */,
@@ -438,6 +424,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Pets/Pets.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -465,6 +452,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Pets/Pets.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -520,15 +508,15 @@
 				kind = branch;
 			};
 		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		350A2D712836F3300052C21D /* Helm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 350A2D702836F3300052C21D /* XCRemoteSwiftPackageReference "Helm" */;
-			productName = Helm;
+		35CF37262857EE5200958B7B /* XCRemoteSwiftPackageReference "SwiftValidators" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gkaimakas/SwiftValidators";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
 		};
-/* End XCSwiftPackageProductDependency section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		354B02692840647000AB2650 /* Pets.xcdatamodeld */ = {

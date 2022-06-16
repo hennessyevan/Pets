@@ -3,6 +3,7 @@ import SwiftUI
 
 struct PetDetailView: View {
   @ObservedObject var pet: Pet
+
   @State private var share: CKShare?
   @State private var showShareSheet = false
   @State private var showEditSheet = false
@@ -21,10 +22,6 @@ struct PetDetailView: View {
             .font(.headline)
           Text(pet.details)
             .font(.subheadline)
-          Text(pet.createdAt.formatted(date: .abbreviated, time: .shortened))
-            .font(.footnote)
-            .foregroundColor(.secondary)
-            .padding(.bottom, 8)
         }
       }
 
@@ -84,8 +81,8 @@ struct PetDetailView: View {
               ? "person.crop.circle.fill.badge.checkmark"
               : "person.crop.circle.badge.plus"
           )
-        }
-      }
+				}
+			}
     }
     .onAppear(perform: {
       self.share = stack.getShare(pet)
@@ -162,8 +159,8 @@ struct PetDetailView_Preview: PreviewProvider {
   }()
   
   static var previews: some View {
-  
-    
-    return PetDetailView(pet: pet)
+		return NavigationStack {
+			PetDetailView(pet: pet)
+		}
   }
 }

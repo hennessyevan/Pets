@@ -1,77 +1,108 @@
 import SwiftUI
 
-struct EditPetView: View {
-  let pet: Pet
+public struct EditPetView: View {
+	public let pet: Pet
+	
+	/// Form Inputs
+	@State var name = ""
+	@State var image: Image?
+	@State var birthday: Date?
+	
+	/// Image Picker
+	@State private var inputImage: UIImage?
+	@State private var showingImagePicker = false
+	
+	@State private var showingDeleteConfirmation = false
+
   private var stack = CoreDataStack.shared
-  private var hasInvalidData: Bool {
-    return pet.name.isBlank ||
-    pet.details.isBlank ||
-    (pet.name == captionText && pet.details == detailsText)
-  }
 
-  @State private var captionText: String = ""
-  @State private var detailsText: String = ""
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) var dismiss
   @Environment(\.managedObjectContext) var managedObjectContext
+	
+	public init(pet: Pet) {
+		self.pet = pet
+	}
 
-  init(pet: Pet) {
-    self.pet = pet
+  public var body: some View {
+		NavigationStack {
+			Form {
+						
+						Section {
+							TextField("Name", text: $name, prompt: Text("Name"))
+						} header: {
+							Text("Name")
+						} footer: {
+							Text("Name is required")
+								.font(.caption)
+								.foregroundColor(name.isBlank ? .red : .clear)
+						}
+				
+				Section {
+					Button("Delete \(pet.name)") {
+						showingDeleteConfirmation = true
+					}
+				}
+						
+				}
+			.confirmationDialog("Delete \(pet.name)", isPresented: $showingDeleteConfirmation) {
+				Button("Delete", role: .destructive) {
+					stack.delete(pet)
+					dismiss()
+				}
+			}
+			.navigationTitle("Edit \(pet.name)")
+				.toolbar {
+					ToolbarItem(placement: .navigationBarTrailing) {
+						Button {
+							save()
+						} label: {
+							Text("Save")
+						}
+						.disabled(!isValid)
+					}
+					ToolbarItem(placement: .navigationBarLeading) {
+						Button {
+							dismiss()
+						} label: {
+							Text("Cancel")
+						}
+					}
+				}
+			.onAppear {
+				name = pet.name
+			}
+		}
   }
-
-  var body: some View {
-    NavigationView {
-      VStack {
-        VStack(alignment: .leading) {
-          Text("Caption")
-            .font(.caption)
-            .foregroundColor(.secondary)
-          TextField(text: $captionText) {}
-            .textFieldStyle(.roundedBorder)
-        }
-        .padding(.bottom, 8)
-
-        VStack(alignment: .leading) {
-          Text("Details")
-            .font(.caption)
-            .foregroundColor(.secondary)
-          TextEditor(text: $detailsText)
-        }
-      }
-      .padding()
-      .navigationTitle("Edit Pet")
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            managedObjectContext.performAndWait {
-              pet.name = captionText
-              pet.details = detailsText
-              stack.save()
-              presentationMode.wrappedValue.dismiss()
-            }
-          } label: {
-            Text("Save")
-          }
-          .disabled(hasInvalidData)
-        }
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button {
-            presentationMode.wrappedValue.dismiss()
-          } label: {
-            Text("Cancel")
-          }
-        }
-      }
-    }
-    .onAppear {
-      captionText = pet.name
-      detailsText = pet.details
-    }
-  }
+	
+	var isValid: Bool {
+		return !name.isBlank
+	}
+	
+	func save() {
+		managedObjectContext.performAndWait {
+			pet.name = name
+			stack.save()
+			dismiss()
+		}
+	}
 }
 
-// MARK: String
-extension String {
-  var isBlank: Bool {
-    self.trimmingCharacters(in: .whitespaces).isEmpty
-  }
+
+struct EditPetView_Previews: PreviewProvider {
+	static var pet = {
+		let _pet = Pet(context: CoreDataStack.shared.context)
+		_pet.id = UUID()
+		_pet.createdAt = Date.now
+		_pet.name = "Fido"
+		_pet.details = "Hello"
+		return _pet
+	}()
+	
+	static var previews: some View {
+		HStack {
+			EmptyView()
+		}.sheet(isPresented: .constant(true)) {
+			EditPetView(pet: pet)
+		}
+	}
 }

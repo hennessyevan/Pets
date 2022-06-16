@@ -13,3 +13,10 @@ extension String: Identifiable {
         self
     }
 }
+
+
+extension String {
+	var isBlank: Bool {
+		self.trimmingCharacters(in: .whitespaces).isEmpty
+	}
+}
