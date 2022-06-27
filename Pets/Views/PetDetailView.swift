@@ -1,166 +1,196 @@
 import CloudKit
 import SwiftUI
+import SystemColors
 
 struct PetDetailView: View {
-  @ObservedObject var pet: Pet
-
-  @State private var share: CKShare?
-  @State private var showShareSheet = false
-  @State private var showEditSheet = false
-  private let stack = CoreDataStack.shared
-
-  var body: some View {
-    List {
-      Section {
-        VStack(alignment: .leading, spacing: 4) {
-          if let imageData = pet.image, let image = UIImage(data: imageData) {
-            Image(uiImage: image)
-              .resizable()
-              .scaledToFit()
-          }
-          Text(pet.name)
-            .font(.headline)
-          Text(pet.details)
-            .font(.subheadline)
-        }
-      }
-
-      if let share = share {
-        Section {
-          ForEach(share.participants, id: \.self) { participant in
-            VStack(alignment: .leading) {
-              Text(participant.userIdentity.nameComponents?.formatted(.name(style: .long)) ?? "")
-                .font(.headline)
-              Text("Acceptance Status: \(string(for: participant.acceptanceStatus))")
-                .font(.subheadline)
-              Text("Role: \(string(for: participant.role))")
-                .font(.subheadline)
-              Text("Permissions: \(string(for: participant.permission))")
-                .font(.subheadline)
-            }
-            .padding(.bottom, 8)
-          }
-        } header: {
-          Text("Shared With")
-        }
-      }
-    }
-    .sheet(isPresented: $showShareSheet, content: {
-      if let share = share {
-        CloudSharingView(
-          share: share,
-          container: stack.ckContainer,
-          pet: pet
-        )
-      }
-    })
-    .sheet(isPresented: $showEditSheet, content: {
-      EditPetView(pet: pet)
-    })
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        if (stack.canUpdate(object: pet)) {
-          Button {
-            showEditSheet.toggle()
-          } label: {
-            Text("Edit")
-          }
-        }
-      }
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Button {
-          if !stack.isShared(object: pet) {
-            Task {
-              await createShare(pet)
-            }
-          }
-          showShareSheet = true
-        } label: {
-          Image(systemName:
-            stack.isShared(object: pet)
-              ? "person.crop.circle.fill.badge.checkmark"
-              : "person.crop.circle.badge.plus"
-          )
+	@Environment(\.managedObjectContext) var context
+	@Environment(\.dismiss) var dismiss
+	
+	
+	@ObservedObject var pet: Pet
+	
+	@State private var share: CKShare?
+	
+	@State private var showShareSheet = false
+	@State private var showEditSheet = false
+	@State private var loadingShare = false
+	
+	private let stack = CoreDataStack.shared
+	
+	var body: some View {
+		List {
+			ProfileImageView(name: pet.wrappedName, image: (pet.image != nil) ? pet.uiImage : nil)
+				.listRowBackground(Color.clear)
+			
+			Section {
+				HStack {
+					Button(action: { withAnimation { addFoodEntry() } }) {
+						Label("Feed", systemImage: "plus")
+					}
+					.buttonStyle(.bordered)
+				}.centeredHorizontally()
+			}
+			.listRowSeparator(.hidden)
+			.listRowBackground(Color.clear)
+			
+			PetFoodView(pet: pet)
+			
+			if let birthday = pet.birthday {
+				Section {
+					Text(DateFormatter.DATE_MEDIUM.string(from: birthday))
+				} header: {
+					Label("Birthday", systemImage: "gift")
 				}
 			}
-    }
-    .onAppear(perform: {
-      self.share = stack.getShare(pet)
-    })
-  }
+			
+			Button("Delete", role: .destructive, action: {
+				try! pet.delete()
+				dismiss()
+			})
+			
+			if let share {
+				Section {
+					ForEach(share.participants, id: \.self) { participant in
+						VStack(alignment: .leading) {
+							Text(participant.userIdentity.nameComponents?.formatted(.name(style: .long)) ?? "")
+								.font(.subheadline)
+							Text("\(string(for: participant.acceptanceStatus))\(string(for: participant.permission))")
+								.font(.caption)
+						}
+						.listRowSeparator(.hidden)
+						.font(.caption)
+						.foregroundColor(.gray)
+						.padding(.bottom, 8)
+					}
+				} header: {
+					Text("Shared With")
+				}.listRowBackground(Color.clear)
+			}
+			
+		}
+		.sheet(isPresented: $showShareSheet, content: {
+			if let share {
+				CloudSharingView(
+					share: share,
+					container: stack.ckContainer,
+					pet: pet
+				)
+			}
+		})
+		.navigationTitle(pet.wrappedName)
+		.listStyle(.insetGrouped)
+		.sheet(isPresented: $showEditSheet, content: {
+			//			EditPetView(pet: viewModel.pet)
+		})
+		.toolbar {
+			ToolbarItem(placement: .navigationBarTrailing) {
+				if (canUpdate) {
+					Button("Edit", action: { showEditSheet.toggle() })
+				}
+			}
+			
+			ToolbarItem(placement: .navigationBarTrailing) {
+				if stack.isICloudAvailable() {
+					Button {
+						Task {
+							try? await sharePet(pet: pet)
+						}
+					} label: {
+						if loadingShare {
+							ProgressView()
+						} else {
+							Image(systemName:
+											isShared
+										? "person.crop.circle.fill.badge.checkmark"
+										: "person.crop.circle.badge.plus"
+							)
+						}
+					}
+				}
+			}
+		}
+//		.onAppear {
+//			self.share = stack.getShare(pet)
+//		}
+	}
+	
+	private func sharePet(pet: Pet) async throws {
+		loadingShare = true
+		
+		do {
+			await fetchOrCreateShare(pet)
+			loadingShare = false
+		}
+	}
 }
 
-// MARK: Returns CKShare participant permission
+// MARK: Returns CKShare participant permission strings
 extension PetDetailView {
-  private func string(for permission: CKShare.ParticipantPermission) -> String {
-    switch permission {
-    case .unknown:
-      return "Unknown"
-    case .none:
-      return "None"
-    case .readOnly:
-      return "Read-Only"
-    case .readWrite:
-      return "Read-Write"
-    @unknown default:
-      fatalError("A new value added to CKShare.Participant.Permission")
-    }
-  }
-
-  private func string(for role: CKShare.ParticipantRole) -> String {
-    switch role {
-    case .owner:
-      return "Owner"
-    case .privateUser:
-      return "Private User"
-    case .publicUser:
-      return "Public User"
-    case .unknown:
-      return "Unknown"
-    @unknown default:
-      fatalError("A new value added to CKShare.Participant.Role")
-    }
-  }
-
-  private func string(for acceptanceStatus: CKShare.ParticipantAcceptanceStatus) -> String {
-    switch acceptanceStatus {
-    case .accepted:
-      return "Accepted"
-    case .removed:
-      return "Removed"
-    case .pending:
-      return "Invited"
-    case .unknown:
-      return "Unknown"
-    @unknown default:
-      fatalError("A new value added to CKShare.Participant.AcceptanceStatus")
-    }
-  }
-  
-  private func createShare(_ pet: Pet) async {
-    do {
-      let (_, share, _) = try await stack.persistentContainer.share([pet], to: nil)
-      share[CKShare.SystemFieldKey.title] = pet.name
-      self.share = share
-    } catch {
-      print("Failed to create share")
-    }
-  }
+	private func string(for permission: CKShare.ParticipantPermission) -> String {
+		switch permission {
+		case .unknown:
+			return "Unknown"
+		case .none:
+			return "None"
+		case .readOnly:
+			return "Read Only"
+		case .readWrite:
+			return "Read & Write"
+		@unknown default:
+			fatalError("A new value added to CKShare.Participant.Permission")
+		}
+	}
+	
+	private func string(for acceptanceStatus: CKShare.ParticipantAcceptanceStatus) -> String {
+		return acceptanceStatus == .pending ? " - Pending" : ""
+	}
+	
+	private func fetchOrCreateShare(_ pet: Pet) async {
+		if self.share != nil {
+			self.showShareSheet = true
+			return
+		}
+		
+		self.loadingShare = true
+		
+		do {
+			let (_, share, _) = try await stack.persistentContainer.share([pet], to: nil)
+			share[CKShare.SystemFieldKey.title] = pet.name
+			self.share = share
+			self.loadingShare = false
+			self.showShareSheet = true
+		} catch {
+			print("Failed to create share")
+			self.loadingShare = false
+		}
+	}
+	
+	private func addFoodEntry() {
+		do {
+			let foodEntry = FoodEntry(context: context)
+			foodEntry.date = Date.now
+			
+			pet.addToFoodEntries(foodEntry)
+			try pet.save()
+		}
+		catch {
+			print("Failed to add food entry")
+		}
+	}
+	
+	var canUpdate: Bool {
+		stack.canUpdate(object: pet)
+	}
+	
+	var isShared: Bool {
+		stack.isShared(object: pet)
+	}
 }
 
 struct PetDetailView_Preview: PreviewProvider {
-  static var pet = {
-    let _pet = Pet(context: CoreDataStack.shared.context)
-    _pet.id = UUID()
-    _pet.createdAt = Date.now
-    _pet.name = "Fido"
-    _pet.details = "Hello"
-    return _pet
-  }()
-  
-  static var previews: some View {
-		return NavigationStack {
-			PetDetailView(pet: pet)
+	static var previews: some View {
+		return NavigationView {
+			PetDetailView(pet: Pet.preview)
 		}
-  }
+	}
 }

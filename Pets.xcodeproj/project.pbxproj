@@ -8,40 +8,51 @@
 
 /* Begin PBXBuildFile section */
 		1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1839F4AF25190F2A00BB00F1 /* AppMain.swift */; };
-		18D775C522AD944300AE281E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D775C422AD944300AE281E /* HomeView.swift */; };
+		18D775C522AD944300AE281E /* PetsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D775C422AD944300AE281E /* PetsListView.swift */; };
 		18D775C722AD944400AE281E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
 		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
 		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
 		2139E772274FD48500FD2327 /* AddPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2139E771274FD48500FD2327 /* AddPetView.swift */; };
 		2139E775274FDA9F00FD2327 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2139E774274FDA9F00FD2327 /* ImagePicker.swift */; };
-		215443322755DBF1003A52A7 /* Pet+ManagedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215443302755DBF1003A52A7 /* Pet+ManagedModel.swift */; };
+		215443322755DBF1003A52A7 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215443302755DBF1003A52A7 /* Pet.swift */; };
 		21A2495C274FF77900A88DE4 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A2495B274FF77900A88DE4 /* CloudKit.framework */; };
 		21A2495E274FFE1300A88DE4 /* CloudSharingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A2495D274FFE1300A88DE4 /* CloudSharingController.swift */; };
 		21A249602752F85800A88DE4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A2495F2752F85800A88DE4 /* CoreDataStack.swift */; };
 		21A249622753022A00A88DE4 /* PetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A249612753022A00A88DE4 /* PetDetailView.swift */; };
 		21A24964275304EA00A88DE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A24963275304EA00A88DE4 /* AppDelegate.swift */; };
 		21CA6C5227532FC700E1C8E1 /* EditPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CA6C5127532FC700E1C8E1 /* EditPetView.swift */; };
+		3541E5322866B0D500FB2164 /* CloudKit++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3541E5312866B0D500FB2164 /* CloudKit++.swift */; };
+		3541E5342867632F00FB2164 /* AppDelegate+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3541E5332867632F00FB2164 /* AppDelegate+Notifications.swift */; };
 		354B026B2840647000AB2650 /* Pets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 354B02692840647000AB2650 /* Pets.xcdatamodeld */; };
-		35729848285A9840002E9010 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35729847285A9840002E9010 /* View+Extensions.swift */; };
-		3572984A285A9E38002E9010 /* Binding+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35729849285A9E38002E9010 /* Binding+Extensions.swift */; };
+		3572984A285A9E38002E9010 /* Binding++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35729849285A9E38002E9010 /* Binding++.swift */; };
+		357751C1286A5A2100D891EA /* CloudKitSubscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357751C0286A5A2100D891EA /* CloudKitSubscriptions.swift */; };
 		35A229B72857799D00FC4131 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A229B62857799D00FC4131 /* DataLoader.swift */; };
-		35A5DFAA28411327007BF835 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A5DFA928411327007BF835 /* Color+Extensions.swift */; };
 		35CF37252857D87900958B7B /* Breed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CF37242857D87900958B7B /* Breed.swift */; };
-		35D8C443284050CD00D95A31 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D8C442284050CD00D95A31 /* String+Extensions.swift */; };
+		35CF4D1A285BE66400D4A6C4 /* Date++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CF4D19285BE66400D4A6C4 /* Date++.swift */; };
+		35CF4D1D285D066800D4A6C4 /* SystemColors in Frameworks */ = {isa = PBXBuildFile; productRef = 35CF4D1C285D066800D4A6C4 /* SystemColors */; };
+		35CF4D1F285D0ADD00D4A6C4 /* View++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CF4D1E285D0ADD00D4A6C4 /* View++.swift */; };
+		35D8C443284050CD00D95A31 /* String++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D8C442284050CD00D95A31 /* String++.swift */; };
 		35D8C44A28405F0600D95A31 /* DogBreeds.json in Resources */ = {isa = PBXBuildFile; fileRef = 35D8C44928405F0600D95A31 /* DogBreeds.json */; };
+		35E0A19F285BB9550083E9BB /* PetRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0A19E285BB9550083E9BB /* PetRowView.swift */; };
+		35E0A1A4285BBF120083E9BB /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0A1A3285BBF120083E9BB /* BaseModel.swift */; };
+		35E7F97828613339003A98EB /* FormValidator in Frameworks */ = {isa = PBXBuildFile; productRef = 35E7F97728613339003A98EB /* FormValidator */; };
+		35E7F97A28623FBE003A98EB /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7F97928623FBE003A98EB /* ProfileImageView.swift */; };
+		35E7F97C28625B78003A98EB /* PetFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7F97B28625B78003A98EB /* PetFoodView.swift */; };
+		35E7F97E28625BEB003A98EB /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7F97D28625BEB003A98EB /* FoodEntry.swift */; };
+		35E7F9802863555D003A98EB /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7F97F2863555D003A98EB /* ButtonStyles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1839F4AF25190F2A00BB00F1 /* AppMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
 		18D775BD22AD944300AE281E /* Pets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pets.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		18D775C422AD944300AE281E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		18D775C422AD944300AE281E /* PetsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsListView.swift; sourceTree = "<group>"; };
 		18D775C622AD944400AE281E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2139E771274FD48500FD2327 /* AddPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPetView.swift; sourceTree = "<group>"; };
 		2139E774274FDA9F00FD2327 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		215443302755DBF1003A52A7 /* Pet+ManagedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pet+ManagedModel.swift"; sourceTree = "<group>"; };
+		215443302755DBF1003A52A7 /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
 		21A24959274FF76400A88DE4 /* Pets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pets.entitlements; sourceTree = "<group>"; };
 		21A2495B274FF77900A88DE4 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		21A2495D274FFE1300A88DE4 /* CloudSharingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSharingController.swift; sourceTree = "<group>"; };
@@ -49,14 +60,23 @@
 		21A249612753022A00A88DE4 /* PetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailView.swift; sourceTree = "<group>"; };
 		21A24963275304EA00A88DE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21CA6C5127532FC700E1C8E1 /* EditPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPetView.swift; sourceTree = "<group>"; };
+		3541E5312866B0D500FB2164 /* CloudKit++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit++.swift"; sourceTree = "<group>"; };
+		3541E5332867632F00FB2164 /* AppDelegate+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Notifications.swift"; sourceTree = "<group>"; };
 		354B026A2840647000AB2650 /* Pets.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pets.xcdatamodel; sourceTree = "<group>"; };
-		35729847285A9840002E9010 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
-		35729849285A9E38002E9010 /* Binding+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extensions.swift"; sourceTree = "<group>"; };
+		35729849285A9E38002E9010 /* Binding++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding++.swift"; sourceTree = "<group>"; };
+		357751C0286A5A2100D891EA /* CloudKitSubscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSubscriptions.swift; sourceTree = "<group>"; };
 		35A229B62857799D00FC4131 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
-		35A5DFA928411327007BF835 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		35CF37242857D87900958B7B /* Breed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breed.swift; sourceTree = "<group>"; };
-		35D8C442284050CD00D95A31 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		35CF4D19285BE66400D4A6C4 /* Date++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date++.swift"; sourceTree = "<group>"; };
+		35CF4D1E285D0ADD00D4A6C4 /* View++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View++.swift"; sourceTree = "<group>"; };
+		35D8C442284050CD00D95A31 /* String++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String++.swift"; sourceTree = "<group>"; };
 		35D8C44928405F0600D95A31 /* DogBreeds.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DogBreeds.json; sourceTree = "<group>"; };
+		35E0A19E285BB9550083E9BB /* PetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRowView.swift; sourceTree = "<group>"; };
+		35E0A1A3285BBF120083E9BB /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		35E7F97928623FBE003A98EB /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		35E7F97B28625B78003A98EB /* PetFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFoodView.swift; sourceTree = "<group>"; };
+		35E7F97D28625BEB003A98EB /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
+		35E7F97F2863555D003A98EB /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +85,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				21A2495C274FF77900A88DE4 /* CloudKit.framework in Frameworks */,
+				35CF4D1D285D066800D4A6C4 /* SystemColors in Frameworks */,
+				35E7F97828613339003A98EB /* FormValidator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				35D8C441284050BE00D95A31 /* Extensions */,
-				2139E773274FD55D00FD2327 /* Controller */,
+				2139E773274FD55D00FD2327 /* Helpers */,
 				2139E76E274FD13900FD2327 /* Views */,
 				2139E76A274FCC8000FD2327 /* Models */,
 				1839F4AF25190F2A00BB00F1 /* AppMain.swift */,
@@ -121,9 +143,11 @@
 			children = (
 				354B02692840647000AB2650 /* Pets.xcdatamodeld */,
 				21A2495F2752F85800A88DE4 /* CoreDataStack.swift */,
-				215443302755DBF1003A52A7 /* Pet+ManagedModel.swift */,
+				215443302755DBF1003A52A7 /* Pet.swift */,
 				35D8C44928405F0600D95A31 /* DogBreeds.json */,
 				35CF37242857D87900958B7B /* Breed.swift */,
+				35E0A1A3285BBF120083E9BB /* BaseModel.swift */,
+				35E7F97D28625BEB003A98EB /* FoodEntry.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -132,20 +156,25 @@
 			isa = PBXGroup;
 			children = (
 				2139E771274FD48500FD2327 /* AddPetView.swift */,
-				18D775C422AD944300AE281E /* HomeView.swift */,
+				18D775C422AD944300AE281E /* PetsListView.swift */,
 				2139E774274FDA9F00FD2327 /* ImagePicker.swift */,
 				21A249612753022A00A88DE4 /* PetDetailView.swift */,
 				21CA6C5127532FC700E1C8E1 /* EditPetView.swift */,
+				35E0A19E285BB9550083E9BB /* PetRowView.swift */,
+				35E7F97928623FBE003A98EB /* ProfileImageView.swift */,
+				35E7F97B28625B78003A98EB /* PetFoodView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		2139E773274FD55D00FD2327 /* Controller */ = {
+		2139E773274FD55D00FD2327 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				35A229B62857799D00FC4131 /* DataLoader.swift */,
 				21A2495D274FFE1300A88DE4 /* CloudSharingController.swift */,
+				357751C0286A5A2100D891EA /* CloudKitSubscriptions.swift */,
 			);
-			path = Controller;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		21A2495A274FF77900A88DE4 /* Frameworks */ = {
@@ -159,11 +188,13 @@
 		35D8C441284050BE00D95A31 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				35D8C442284050CD00D95A31 /* String+Extensions.swift */,
-				35A5DFA928411327007BF835 /* Color+Extensions.swift */,
-				35A229B62857799D00FC4131 /* DataLoader.swift */,
-				35729847285A9840002E9010 /* View+Extensions.swift */,
-				35729849285A9E38002E9010 /* Binding+Extensions.swift */,
+				35D8C442284050CD00D95A31 /* String++.swift */,
+				35729849285A9E38002E9010 /* Binding++.swift */,
+				35CF4D19285BE66400D4A6C4 /* Date++.swift */,
+				35CF4D1E285D0ADD00D4A6C4 /* View++.swift */,
+				35E7F97F2863555D003A98EB /* ButtonStyles.swift */,
+				3541E5312866B0D500FB2164 /* CloudKit++.swift */,
+				3541E5332867632F00FB2164 /* AppDelegate+Notifications.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -175,7 +206,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18D775D122AD944400AE281E /* Build configuration list for PBXNativeTarget "Pets" */;
 			buildPhases = (
-				181FE31D248EA6C900A180EA /* SwiftLint */,
 				18D775B922AD944300AE281E /* Sources */,
 				18D775BA22AD944300AE281E /* Frameworks */,
 				18D775BB22AD944300AE281E /* Resources */,
@@ -186,6 +216,8 @@
 			);
 			name = Pets;
 			packageProductDependencies = (
+				35CF4D1C285D066800D4A6C4 /* SystemColors */,
+				35E7F97728613339003A98EB /* FormValidator */,
 			);
 			productName = MyRWTutorial;
 			productReference = 18D775BD22AD944300AE281E /* Pets.app */;
@@ -216,8 +248,8 @@
 			);
 			mainGroup = 18D775B422AD944300AE281E;
 			packageReferences = (
-				350A2D702836F3300052C21D /* XCRemoteSwiftPackageReference "Helm" */,
-				35CF37262857EE5200958B7B /* XCRemoteSwiftPackageReference "SwiftValidators" */,
+				35CF4D1B285D066800D4A6C4 /* XCRemoteSwiftPackageReference "swiftui-system-colors" */,
+				35E7F9662860B55A003A98EB /* XCRemoteSwiftPackageReference "SwiftUIFormValidator" */,
 			);
 			productRefGroup = 18D775BE22AD944300AE281E /* Products */;
 			projectDirPath = "";
@@ -242,48 +274,36 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		181FE31D248EA6C900A180EA /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		18D775B922AD944300AE281E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18D775C522AD944300AE281E /* HomeView.swift in Sources */,
+				18D775C522AD944300AE281E /* PetsListView.swift in Sources */,
+				357751C1286A5A2100D891EA /* CloudKitSubscriptions.swift in Sources */,
 				2139E772274FD48500FD2327 /* AddPetView.swift in Sources */,
+				35CF4D1A285BE66400D4A6C4 /* Date++.swift in Sources */,
 				1839F4B025190F2A00BB00F1 /* AppMain.swift in Sources */,
+				35E7F97E28625BEB003A98EB /* FoodEntry.swift in Sources */,
 				35CF37252857D87900958B7B /* Breed.swift in Sources */,
-				35D8C443284050CD00D95A31 /* String+Extensions.swift in Sources */,
+				35E0A19F285BB9550083E9BB /* PetRowView.swift in Sources */,
+				35D8C443284050CD00D95A31 /* String++.swift in Sources */,
+				3541E5322866B0D500FB2164 /* CloudKit++.swift in Sources */,
+				35E7F9802863555D003A98EB /* ButtonStyles.swift in Sources */,
 				2139E775274FDA9F00FD2327 /* ImagePicker.swift in Sources */,
-				35729848285A9840002E9010 /* View+Extensions.swift in Sources */,
-				35A5DFAA28411327007BF835 /* Color+Extensions.swift in Sources */,
-				3572984A285A9E38002E9010 /* Binding+Extensions.swift in Sources */,
-				215443322755DBF1003A52A7 /* Pet+ManagedModel.swift in Sources */,
+				3572984A285A9E38002E9010 /* Binding++.swift in Sources */,
+				215443322755DBF1003A52A7 /* Pet.swift in Sources */,
 				35A229B72857799D00FC4131 /* DataLoader.swift in Sources */,
 				21CA6C5227532FC700E1C8E1 /* EditPetView.swift in Sources */,
+				35E7F97A28623FBE003A98EB /* ProfileImageView.swift in Sources */,
+				35CF4D1F285D0ADD00D4A6C4 /* View++.swift in Sources */,
 				21A249622753022A00A88DE4 /* PetDetailView.swift in Sources */,
+				3541E5342867632F00FB2164 /* AppDelegate+Notifications.swift in Sources */,
 				21A2495E274FFE1300A88DE4 /* CloudSharingController.swift in Sources */,
 				21A24964275304EA00A88DE4 /* AppDelegate.swift in Sources */,
+				35E0A1A4285BBF120083E9BB /* BaseModel.swift in Sources */,
 				21A249602752F85800A88DE4 /* CoreDataStack.swift in Sources */,
+				35E7F97C28625B78003A98EB /* PetFoodView.swift in Sources */,
 				354B026B2840647000AB2650 /* Pets.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,8 +453,9 @@
 				DEVELOPMENT_TEAM = 4CUBSV9SX3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Pets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Pets;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -443,8 +464,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hennessyevan.Pets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -461,8 +485,9 @@
 				DEVELOPMENT_TEAM = 4CUBSV9SX3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Pets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Pets;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -471,8 +496,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hennessyevan.Pets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};
@@ -500,23 +528,36 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		350A2D702836F3300052C21D /* XCRemoteSwiftPackageReference "Helm" */ = {
+		35CF4D1B285D066800D4A6C4 /* XCRemoteSwiftPackageReference "swiftui-system-colors" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/valentinradu/Helm";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-		35CF37262857EE5200958B7B /* XCRemoteSwiftPackageReference "SwiftValidators" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/gkaimakas/SwiftValidators";
+			repositoryURL = "https://github.com/diniska/swiftui-system-colors";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 1.0.0;
+			};
+		};
+		35E7F9662860B55A003A98EB /* XCRemoteSwiftPackageReference "SwiftUIFormValidator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ShabanKamell/SwiftUIFormValidator";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		35CF4D1C285D066800D4A6C4 /* SystemColors */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35CF4D1B285D066800D4A6C4 /* XCRemoteSwiftPackageReference "swiftui-system-colors" */;
+			productName = SystemColors;
+		};
+		35E7F97728613339003A98EB /* FormValidator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35E7F9662860B55A003A98EB /* XCRemoteSwiftPackageReference "SwiftUIFormValidator" */;
+			productName = FormValidator;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		354B02692840647000AB2650 /* Pets.xcdatamodeld */ = {

@@ -1,110 +1,134 @@
 import SwiftUI
 import PhotosUI
+import CoreData
+import FormValidator
 
 struct AddPetView: View {
-	@Environment(\.managedObjectContext) var managedObjectContext
-	@Environment(\.dismiss) private var dismiss
+	@Environment(\.dismiss) var dismiss
+	@Environment(\.managedObjectContext) var context
 	
-	@StateObject private var viewModel = ViewModel()
+	@StateObject private var formState = AddPetForm()
 	
-	private var stack = CoreDataStack.shared
+	@State var showingSourceTypePicker = false
+	@State var showingImagePicker = false
+	@State var photoPickerSourceType: UIImagePickerController.SourceType = .camera
 	
 	var body: some View {
-		NavigationStack {
+		NavigationView {
 			Form {
 				Section {
-					TextField("Name", text: $viewModel.name)
-				} footer: {
-					Text("Name is required")
-						.font(.caption)
-						.foregroundColor(viewModel.name.isBlank ? .red : .clear)
+					ProfileImageView(
+						editing: true,
+						name: formState.name,
+						image: formState.inputImage,
+						onAdd: { showingSourceTypePicker = true }
+					)
 				}
+				.listRowBackground(Color.clear)
 				
-				Section {
-					if viewModel.image == nil {
-						Button {
-							viewModel.showingImagePicker = true
-						} label: {
-							Text("Add a photo")
-						}
-					}
-					
-					viewModel.image?
-						.resizable()
-						.scaledToFit()
-				}
+				TextField("Name", text: $formState.name)
+					.validation(formState.nameValidation)
 				
 				DatePicker(
 					"Birthday",
-					selection: $viewModel.birthday.flatten(defaultValue: Date()),
+					selection: $formState.birthday.flatten(defaultValue: Date()),
+					in: formState.birthdateRange,
 					displayedComponents: [.date]
 				)
 				
-				Section {
-					Button {
-						createNewPet()
-						dismiss()
-					} label: {
-						Text("Save")
+				HStack {
+					Text("Sex")
+					Spacer()
+					Picker("Sex", selection: $formState.sex) {
+						Text(Sex.male.rawValue.capitalized).tag(Sex.male)
+						Text(Sex.female.rawValue.capitalized).tag(Sex.female)
 					}
-					.disabled(!viewModel.isValid)
+					.frame(width: 200)
+					.pickerStyle(.segmented)
 				}
+				
 			}
-			.fullScreenCover(isPresented: $viewModel.showingImagePicker, onDismiss: loadImage) {
-				ImagePicker(image: $viewModel.inputImage, sourceType: .camera)
+			.confirmationDialog("Add Photo", isPresented: $showingSourceTypePicker) {
+				Button("Camera") { pickSourceType(.camera) }
+				Button("Photo Library") { pickSourceType(.photoLibrary) }
+			}
+			.fullScreenCover(isPresented: $showingImagePicker, onDismiss: { loadImage() }) {
+				ImagePicker(image: $formState.inputImage, sourceType: photoPickerSourceType)
+					.background(photoPickerSourceType == .camera ? Color.black : nil)
 			}
 			.toolbar {
 				ToolbarItem(placement: .cancellationAction) {
 					Button("Cancel", action: { dismiss() })
 				}
+				
+				ToolbarItem(placement: .confirmationAction) {
+					Button("Save", action: {
+						savePet()
+						dismiss()
+					})
+					.disabled(!formState.form.allValid)
+				}
 			}
 			.navigationTitle("New Pet")
 			.navigationBarTitleDisplayMode(.inline)
-		}
-	}
-}
-
-// MARK: View Model
-fileprivate extension AddPetView {
-	@MainActor class ViewModel: ObservableObject {
-		/// Form Inputs
-		@Published var name = ""
-		@Published var image: Image?
-		@Published var birthday: Date?
-		
-		/// Image Picker
-		@Published var inputImage: UIImage?
-		@Published var showingImagePicker = false
-		
-		var isValid: Bool {
-			return !name.isBlank
+			.interactiveDismissDisabled(formState.form.allValid)
 		}
 	}
 }
 
 
-// MARK: Loading image and creating a new pet
-extension AddPetView {
-	private func loadImage() {
-		guard let inputImage = viewModel.inputImage else { return }
-		viewModel.image = Image(uiImage: inputImage)
+class AddPetForm: ObservableObject {
+	
+	@Published var name: String = ""
+	lazy var nameValidation: ValidationContainer = {
+		$name.nonEmptyValidator(form: form, errorMessage: "Name is required")
+	}()
+	
+	@Published var birthday: Date?
+	var birthdateRange: ClosedRange<Date> {
+		let min = Calendar.current.date(byAdding: .year, value: -35, to: Date())!
+		let max = Date()
+		return min...max
 	}
 	
-	private func createNewPet() {
-		let pet = Pet(context: managedObjectContext)
-		pet.id = UUID()
-		pet.createdAt = Date.now
-		pet.name = viewModel.name
-		let imageData = viewModel.inputImage?.jpegData(compressionQuality: 0.8)
-		pet.image = imageData
-		
-		stack.save()
+	@Published var sex: Sex = .unknown
+	
+	@Published var image: Image?
+	@Published var inputImage: UIImage?
+	
+	lazy var form = {
+		FormValidation(validationType: .immediate)
+	}()
+}
+
+extension AddPetView {
+	func savePet() {
+		do {
+			let pet = Pet(context: context)
+			pet.name = formState.name
+			pet.birthday = formState.birthday
+			pet.wrappedSex = formState.sex
+			
+			try pet.save()
+		} catch {
+			print(error)
+		}
+	}
+	
+	func loadImage() {
+		guard let inputImage = formState.inputImage else { return }
+		formState.image = Image(uiImage: inputImage)
+	}
+	
+	func pickSourceType(_ sourceType: UIImagePickerController.SourceType) {
+		photoPickerSourceType = sourceType
+		showingImagePicker = true
 	}
 }
 
 struct AddPetView_Previews: PreviewProvider {
 	static var previews: some View {
-		HStack {
+		VStack {
 			EmptyView()
 		}.sheet(isPresented: .constant(true)) {
 			AddPetView()
