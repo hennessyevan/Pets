@@ -9,11 +9,10 @@
 import Foundation
 
 extension String: Identifiable {
-    public var id: String {
-        self
-    }
+	public var id: String {
+		self
+	}
 }
-
 
 extension String {
 	var isBlank: Bool {

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PetRowView: View {
 	let pet: Pet
-	
+
 	var body: some View {
 		NavigationLink(destination: PetDetailView(pet: pet)) {
 			HStack(alignment: .center, spacing: 20) {
@@ -20,7 +20,7 @@ struct PetRowView: View {
 					.background(Color.gray.opacity(0.2))
 					.scaledToFill()
 					.cornerRadius(.infinity)
-				
+
 				VStack(alignment: .center) {
 					Text(pet.wrappedName)
 						.font(.title3)
@@ -31,9 +31,10 @@ struct PetRowView: View {
 	}
 }
 
-
+#if DEBUG
 struct PetRowView_Previews: PreviewProvider {
-    static var previews: some View {
-			PetsListView()
-		}
+	static var previews: some View {
+		PetsListView()
+	}
 }
+#endif

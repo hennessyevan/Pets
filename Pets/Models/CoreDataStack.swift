@@ -117,7 +117,7 @@ extension CoreDataStack {
 	}
 	
 	func isOwner(object: NSManagedObject) -> Bool {
-		guard isShared(object: object) else { return false }
+		guard isShared(object: object) else { return true }
 		guard let share = try? persistentContainer.fetchShares(matching: [object.objectID]) [object.objectID] else {
 			print("Couldn't get CKShare")
 			return false
@@ -132,13 +132,13 @@ extension CoreDataStack {
 	
 	func getShare(_ pet: Pet) -> CKShare? {
 		guard isShared(object: pet) else { return nil }
+		
 		guard let shareDictionary = try? persistentContainer.fetchShares(matching: [pet.objectID]), let share = shareDictionary[pet.objectID] else {
 			print("Unable to get CKShare")
 			return nil
 		}
 		
 		share[CKShare.SystemFieldKey.title] = pet.name
-		share[CKShare.SystemFieldKey.thumbnailImageData] = UIImage(named: "AppIcon")!.pngData()
 		return share
 	}
 	

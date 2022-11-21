@@ -33,7 +33,7 @@ struct PetsListView: View {
 					.cornerRadius(10)
 				}
 			}
-			.sheet(isPresented: $addingPet) { AddPetView() }
+			.sheet(isPresented: $addingPet) { PetForm() }
 			.toolbar {
 				ToolbarItem(placement: .automatic) {
 					Button(action: { addingPet = true }) {

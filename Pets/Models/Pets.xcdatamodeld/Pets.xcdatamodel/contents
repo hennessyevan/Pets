@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21223.11" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A380" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="FoodEntry" representedClassName="FoodEntry" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="ownerId" optional="YES" attributeType="String"/>
+        <attribute name="ownerName" optional="YES" attributeType="String"/>
         <relationship name="pet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pet" inverseName="foodEntries" inverseEntity="Pet"/>
     </entity>
     <entity name="Pet" representedClassName="Pet" syncable="YES" codeGenerationType="class">
@@ -10,13 +11,12 @@
         <attribute name="breed" optional="YES" attributeType="String"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="modificationType" optional="YES" attributeType="String"/>
+        <attribute name="modifiedBy" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="sex" optional="YES" attributeType="String"/>
+        <attribute name="species" optional="YES" attributeType="String" defaultValueString="dog"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="foodEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodEntry" inverseName="pet" inverseEntity="FoodEntry"/>
     </entity>
-    <elements>
-        <element name="Pet" positionX="-63" positionY="-18" width="128" height="149"/>
-        <element name="FoodEntry" positionX="-63" positionY="45" width="128" height="74"/>
-    </elements>
 </model>

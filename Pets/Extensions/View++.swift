@@ -6,9 +6,9 @@
 //  Copyright © 2022 Evan Hennessy. All rights reserved.
 //
 
+import FormValidator
 import Foundation
 import SwiftUI
-import FormValidator
 
 extension View {
 	func centeredHorizontally() -> some View {
@@ -19,4 +19,3 @@ extension View {
 		}
 	}
 }
-

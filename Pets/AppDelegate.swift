@@ -19,6 +19,7 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 			if let error {
 				print("acceptShareInvitation error: \(error)")
 			} else {
+				
 				debugPrint("New Share \(String(describing: shares?.first?.description))")
 			}
 		}

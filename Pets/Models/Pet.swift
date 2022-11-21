@@ -21,6 +21,7 @@ extension Pet: BaseModel {
 		for days in 1...10 {
 			let foodEntry: FoodEntry = FoodEntry(context: CoreDataStack.shared.context)
 			foodEntry.date = Calendar.current.date(byAdding: .day, value: days * -1, to: Date())!
+			foodEntry.ownerName = "Evan"
 			try! foodEntry.save()
 			
 			_pet.foodEntryArray.insert(foodEntry, at: 0)
@@ -31,10 +32,20 @@ extension Pet: BaseModel {
 	#endif
 }
 
-enum Sex: String, CaseIterable {
+enum Sex: String, Equatable, CaseIterable {
 	case unknown
 	case male
 	case female
+	
+	var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
+}
+
+enum Species: String, Equatable, CaseIterable {
+	case unknown
+	case dog
+	case cat
+	
+	var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
 }
 
 extension Pet {
@@ -46,6 +57,11 @@ extension Pet {
 	
 	var uiImage: UIImage {
 		UIImage(data: self.image ?? Data()) ?? UIImage()
+	}
+	
+	var wrappedSpecies: Species {
+		get { Species(rawValue: self.species ?? "unknown")! }
+		set(newSpecies) { self.species = newSpecies.rawValue }
 	}
 	
 	var wrappedSex: Sex {
@@ -65,6 +81,12 @@ extension Pet {
 		set(_foodEntryArray) {
 			let set = NSSet(array: _foodEntryArray)
 			self.foodEntries = set
+		}
+	}
+	
+	func sendNotification(message: String) -> Void {
+		Task {
+			await NotificationStack.shared.sendNotification(for: self, with: message)
 		}
 	}
 }

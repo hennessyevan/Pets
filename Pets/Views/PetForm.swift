@@ -1,17 +1,21 @@
-import SwiftUI
-import PhotosUI
 import CoreData
 import FormValidator
+import PhotosUI
+import SwiftUI
 
-struct AddPetView: View {
+struct PetForm: View {
 	@Environment(\.dismiss) var dismiss
 	@Environment(\.managedObjectContext) var context
+	
+	var pet: Pet?
 	
 	@StateObject private var formState = AddPetForm()
 	
 	@State var showingSourceTypePicker = false
 	@State var showingImagePicker = false
 	@State var photoPickerSourceType: UIImagePickerController.SourceType = .camera
+	
+	@State private var editing: Bool = true
 	
 	var body: some View {
 		NavigationView {
@@ -25,6 +29,18 @@ struct AddPetView: View {
 					)
 				}
 				.listRowBackground(Color.clear)
+				
+				HStack {
+					Text("Species")
+					Spacer()
+					Picker("Species", selection: $formState.species) {
+						ForEach(Species.allCases.filter({ $0 != .unknown }), id: \.self) { name in
+							Text(name.rawValue.capitalized).tag(name)
+						}
+					}
+					.frame(width: 200)
+					.pickerStyle(.segmented)
+				}
 				
 				TextField("Name", text: $formState.name)
 					.validation(formState.nameValidation)
@@ -46,7 +62,6 @@ struct AddPetView: View {
 					.frame(width: 200)
 					.pickerStyle(.segmented)
 				}
-				
 			}
 			.confirmationDialog("Add Photo", isPresented: $showingSourceTypePicker) {
 				Button("Camera") { pickSourceType(.camera) }
@@ -69,26 +84,33 @@ struct AddPetView: View {
 					.disabled(!formState.form.allValid)
 				}
 			}
-			.navigationTitle("New Pet")
+			.navigationTitle(editing && pet != nil ? "Edit \(pet!.wrappedName)" : "New Pet")
 			.navigationBarTitleDisplayMode(.inline)
 			.interactiveDismissDisabled(formState.form.allValid)
+			.onAppear {
+				if pet != nil {
+					editing = true
+					formState.name = pet!.wrappedName
+					formState.birthday = pet!.birthday
+					formState.species = pet!.wrappedSpecies
+					formState.sex = pet!.wrappedSex
+				}
+			}
 		}
 	}
 }
 
-
 class AddPetForm: ObservableObject {
+	@Published var species: Species = .dog
 	
 	@Published var name: String = ""
-	lazy var nameValidation: ValidationContainer = {
-		$name.nonEmptyValidator(form: form, errorMessage: "Name is required")
-	}()
+	lazy var nameValidation: ValidationContainer = $name.nonEmptyValidator(form: form, errorMessage: "Name is required")
 	
 	@Published var birthday: Date?
 	var birthdateRange: ClosedRange<Date> {
 		let min = Calendar.current.date(byAdding: .year, value: -35, to: Date())!
 		let max = Date()
-		return min...max
+		return min ... max
 	}
 	
 	@Published var sex: Sex = .unknown
@@ -96,12 +118,10 @@ class AddPetForm: ObservableObject {
 	@Published var image: Image?
 	@Published var inputImage: UIImage?
 	
-	lazy var form = {
-		FormValidation(validationType: .immediate)
-	}()
+	lazy var form = FormValidation(validationType: .immediate)
 }
 
-extension AddPetView {
+extension PetForm {
 	func savePet() {
 		do {
 			let pet = Pet(context: context)
@@ -131,7 +151,7 @@ struct AddPetView_Previews: PreviewProvider {
 		VStack {
 			EmptyView()
 		}.sheet(isPresented: .constant(true)) {
-			AddPetView()
+			PetForm()
 		}
 	}
 }

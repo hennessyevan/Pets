@@ -6,7 +6,6 @@ struct PetDetailView: View {
 	@Environment(\.managedObjectContext) var context
 	@Environment(\.dismiss) var dismiss
 	
-	
 	@ObservedObject var pet: Pet
 	
 	@State private var share: CKShare?
@@ -27,7 +26,7 @@ struct PetDetailView: View {
 					Button(action: { withAnimation { addFoodEntry() } }) {
 						Label("Feed", systemImage: "plus")
 					}
-					.buttonStyle(.bordered)
+					.buttonStyle(ShadowButtonStyle())
 				}.centeredHorizontally()
 			}
 			.listRowSeparator(.hidden)
@@ -43,30 +42,12 @@ struct PetDetailView: View {
 				}
 			}
 			
-			Button("Delete", role: .destructive, action: {
-				try! pet.delete()
-				dismiss()
-			})
-			
-			if let share {
-				Section {
-					ForEach(share.participants, id: \.self) { participant in
-						VStack(alignment: .leading) {
-							Text(participant.userIdentity.nameComponents?.formatted(.name(style: .long)) ?? "")
-								.font(.subheadline)
-							Text("\(string(for: participant.acceptanceStatus))\(string(for: participant.permission))")
-								.font(.caption)
-						}
-						.listRowSeparator(.hidden)
-						.font(.caption)
-						.foregroundColor(.gray)
-						.padding(.bottom, 8)
-					}
-				} header: {
-					Text("Shared With")
-				}.listRowBackground(Color.clear)
+			if isOwner {
+				Button("Delete", role: .destructive, action: {
+					try! pet.delete()
+					dismiss()
+				})
 			}
-			
 		}
 		.sheet(isPresented: $showShareSheet, content: {
 			if let share {
@@ -80,11 +61,11 @@ struct PetDetailView: View {
 		.navigationTitle(pet.wrappedName)
 		.listStyle(.insetGrouped)
 		.sheet(isPresented: $showEditSheet, content: {
-			//			EditPetView(pet: viewModel.pet)
+			PetForm(pet: pet)
 		})
 		.toolbar {
 			ToolbarItem(placement: .navigationBarTrailing) {
-				if (canUpdate) {
+				if canUpdate {
 					Button("Edit", action: { showEditSheet.toggle() })
 				}
 			}
@@ -100,18 +81,18 @@ struct PetDetailView: View {
 							ProgressView()
 						} else {
 							Image(systemName:
-											isShared
-										? "person.crop.circle.fill.badge.checkmark"
-										: "person.crop.circle.badge.plus"
+								isShared
+									? "person.crop.circle.fill.badge.checkmark"
+									: "person.crop.circle.badge.plus"
 							)
 						}
 					}
 				}
 			}
 		}
-//		.onAppear {
-//			self.share = stack.getShare(pet)
-//		}
+		.onAppear {
+			self.share = stack.getShare(pet)
+		}
 	}
 	
 	private func sharePet(pet: Pet) async throws {
@@ -125,6 +106,7 @@ struct PetDetailView: View {
 }
 
 // MARK: Returns CKShare participant permission strings
+
 extension PetDetailView {
 	private func string(for permission: CKShare.ParticipantPermission) -> String {
 		switch permission {
@@ -142,39 +124,58 @@ extension PetDetailView {
 	}
 	
 	private func string(for acceptanceStatus: CKShare.ParticipantAcceptanceStatus) -> String {
-		return acceptanceStatus == .pending ? " - Pending" : ""
+		acceptanceStatus == .pending ? " - Pending" : ""
 	}
 	
 	private func fetchOrCreateShare(_ pet: Pet) async {
-		if self.share != nil {
-			self.showShareSheet = true
+		if share != nil {
+			showShareSheet = true
 			return
 		}
 		
-		self.loadingShare = true
+		if !isOwner {
+			share = stack.getShare(pet)
+			return
+		}
+		
+		loadingShare = true
 		
 		do {
 			let (_, share, _) = try await stack.persistentContainer.share([pet], to: nil)
 			share[CKShare.SystemFieldKey.title] = pet.name
 			self.share = share
-			self.loadingShare = false
-			self.showShareSheet = true
+			loadingShare = false
+			showShareSheet = true
 		} catch {
 			print("Failed to create share")
-			self.loadingShare = false
+			loadingShare = false
 		}
 	}
 	
 	private func addFoodEntry() {
 		do {
 			let foodEntry = FoodEntry(context: context)
+			foodEntry.ownerId = share?.currentUserParticipant?.userIdentity.userRecordID?.recordName
+			foodEntry.ownerName = share?.currentUserParticipant?.userIdentity.nameComponents?.givenName
 			foodEntry.date = Date.now
 			
 			pet.addToFoodEntries(foodEntry)
 			try pet.save()
-		}
-		catch {
+			
+			if share != nil {
+				pet.sendNotification(message: foodEntryNotificationMessage)
+			}
+		} catch {
 			print("Failed to add food entry")
+		}
+	}
+	
+	var foodEntryNotificationMessage: String {
+		let currentUser = share?.currentUserParticipant?.userIdentity
+		if let currentUserFirstName = currentUser?.nameComponents?.givenName {
+			return "\(currentUserFirstName) fed \(pet.wrappedName)"
+		} else {
+			return "\(pet.wrappedName) was fed"
 		}
 	}
 	
@@ -185,12 +186,18 @@ extension PetDetailView {
 	var isShared: Bool {
 		stack.isShared(object: pet)
 	}
+	
+	var isOwner: Bool {
+		stack.isOwner(object: pet)
+	}
 }
 
+#if DEBUG
 struct PetDetailView_Preview: PreviewProvider {
 	static var previews: some View {
-		return NavigationView {
+		NavigationView {
 			PetDetailView(pet: Pet.preview)
 		}
 	}
 }
+#endif

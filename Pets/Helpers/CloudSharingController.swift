@@ -3,8 +3,8 @@ import SwiftUI
 
 import Foundation
 import SwiftUI
-import UIKit
 import CloudKit
+import UIKit
 
 /// This struct wraps a `UICloudSharingController` for use in SwiftUI.
 struct CloudSharingView: UIViewControllerRepresentable {

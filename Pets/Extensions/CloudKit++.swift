@@ -8,10 +8,10 @@
 
 import Foundation
 
-public enum CKQueryNotificationReason : Int {
+public enum CKQueryNotificationReason: Int {
 	case recordCreated
-	
+
 	case recordUpdated
-	
+
 	case recordDeleted
 }

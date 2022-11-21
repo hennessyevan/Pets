@@ -10,20 +10,19 @@ import Foundation
 import SwiftUI
 
 public extension Binding where Value: Equatable {
-		init(_ source: Binding<Value>, deselectTo value: Value) {
-				self.init(get: { source.wrappedValue },
-									set: { source.wrappedValue = $0 == source.wrappedValue ? value : $0 }
-				)
-		}
+	init(_ source: Binding<Value>, deselectTo value: Value) {
+		self.init(get: { source.wrappedValue },
+		          set: { source.wrappedValue = $0 == source.wrappedValue ? value : $0 })
+	}
 }
 
 public extension Binding where Value == Date? {
-		func flatten(defaultValue: Date) -> Binding<Date> {
-				Binding<Date>(
-						get: { wrappedValue ?? defaultValue },
-						set: {
-								wrappedValue = $0
-						}
-				)
-		}
+	func flatten(defaultValue: Date) -> Binding<Date> {
+		Binding<Date>(
+			get: { wrappedValue ?? defaultValue },
+			set: {
+				wrappedValue = $0
+			}
+		)
+	}
 }

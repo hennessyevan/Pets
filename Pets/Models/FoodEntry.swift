@@ -10,6 +10,8 @@ import Foundation
 import CoreData
 
 extension FoodEntry: BaseModel {
+	static let recordType = "CD_FoodEntry"
+	
 	var wrappedDate: Date {
 		self.date ?? Date()
 	}

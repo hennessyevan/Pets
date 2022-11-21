@@ -15,7 +15,7 @@ extension DateFormatter {
 		formatter.calendar = Calendar(identifier: .iso8601)
 		return formatter
 	}()
-	
+
 	static let DATE_MEDIUM: DateFormatter = {
 		let formatter = DateFormatter()
 		formatter.setLocalizedDateFormatFromTemplate("dd MMM YYYY")
@@ -25,14 +25,14 @@ extension DateFormatter {
 }
 
 extension Date {
-		init?(from yyyyMMdd: String?) {
-			if yyyyMMdd == nil { return nil }
-				guard let date = DateFormatter.yyyyMMdd.date(from: yyyyMMdd!) else { return nil }
-				self.init(timeInterval: 0, since: date)
-		}
+	init?(from yyyyMMdd: String?) {
+		if yyyyMMdd == nil { return nil }
+		guard let date = DateFormatter.yyyyMMdd.date(from: yyyyMMdd!) else { return nil }
+		self.init(timeInterval: 0, since: date)
+	}
 
-		init(from yyyyMMdd: String) {
-				let date = DateFormatter.yyyyMMdd.date(from: yyyyMMdd)!
-				self.init(timeInterval: 0, since: date)
-		}
+	init(from yyyyMMdd: String) {
+		let date = DateFormatter.yyyyMMdd.date(from: yyyyMMdd)!
+		self.init(timeInterval: 0, since: date)
+	}
 }
